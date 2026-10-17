@@ -1,8 +1,3 @@
-# Super JinX admin manager (runs on every start)
-#  - first install (no panel admin yet): creates  admin / admin
-#  - after that it NEVER touches your admin: a username/password changed from the panel menu stays forever
-#  - forgot it? set RESET_ADMIN_PASSWORD=1 in Railway + redeploy -> login is back to admin / admin
-#  - creates a hidden internal admin for the support bots (random password, rotated every start)
 import json, os, secrets, sys
 from datetime import datetime, timezone
 sys.path.insert(0, "/code")
