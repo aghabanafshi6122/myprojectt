@@ -1,15 +1,9 @@
-# Super JinX host guard (every 20s)
-# 1) Locked inbound: every route is forced and reverted within 20s if anyone edits it
-# 2) Other inbounds: get the same full route set automatically and are kept in sync,
-#    as long as they still look like ours. Rename a host in the panel and the guard leaves it alone.
-# Every config name starts with the locked brand name, then shows its route and protocol, e.g.
-#   جینکس | 𝗝𝗶𝗻𝗫 ✦ 🚀 Turbo Iran · VLESS      (the apps still pick the fastest one with their ping test)
 import json, os, time, urllib.error, urllib.request, urllib.parse
 
 API = "http://127.0.0.1:8000"
 LOCKED_TAG = json.load(open("/opt/locked_inbound.json"))["tag"]
-LOCKED_REMARK = "جینکس | 𝗝𝗶𝗻𝗫"                    # every config name starts with this
-OLD_REMARKS = ("جینکس | 𝙎𝙪𝙥𝙚𝙧 𝗝𝗶𝗻𝗫",)               # names of the previous version -> renamed automatically
+LOCKED_REMARK = "myprojectt"                    # every config name starts with this
+OLD_REMARKS = ("turbopanel",)               # names of the previous version -> renamed automatically
 DOMAIN = os.environ.get("PANEL_DOMAIN") or os.environ.get("RAILWAY_PUBLIC_DOMAIN", "")
 CF_HOST = os.environ.get("CF_TUNNEL_HOSTNAME", "") if os.environ.get("CF_TUNNEL_TOKEN") else ""
 def _list(name, default=""):
@@ -52,7 +46,7 @@ except ValueError:
 REALITY_SNI = (os.environ.get("JINX_REALITY_SNI") or "www.speedtest.net").strip()
 if TCP_DOMAIN and TCP_PORT and os.environ.get("JINX_REALITY", "1") != "0":
     PATHS[REALITY_TAG] = ""
-PROTO = {REALITY_TAG: "Reality", LOCKED_TAG: "JinX Core", "VLESS WS": "VLESS", "VMESS WS": "VMess", "TROJAN WS": "Trojan", "VLESS HTTPUPGRADE": "HTTPUpgrade", "VLESS XHTTP": "XHTTP", "VLESS XHTTP SU": "XHTTP"}
+PROTO = {REALITY_TAG: "Reality", LOCKED_TAG: "Core", "VLESS WS": "VLESS", "VMESS WS": "VMess", "TROJAN WS": "Trojan", "VLESS HTTPUPGRADE": "HTTPUpgrade", "VLESS XHTTP": "XHTTP", "VLESS XHTTP SU": "XHTTP"}
 # route names (each config gets its own name; the apps still pick the fastest one with their ping test)
 R_RELAY, R_CDN_IP, R_CDN = "🚀 Turbo Iran", "🌩 Cloud Storm", "☁️ Cloud Shield"
 # Railway region of this service (works in all 4; Amsterdam = lowest ping from Iran)
@@ -90,10 +84,10 @@ MUX = {"💫 Hyper Drive", "🔱 Trident", "🌌 Nebula", "🛰 Reality Pulse"}
 SAFE_FP = False                                     # True after the panel refused a fingerprint value
 SAFE_PLAIN = False                                  # True if the panel refused even that: plain http/1.1, no mux (last safe step)
 AVAILABLE = set()                                   # inbound tags this panel really has (filled from the panel every round)
-OLD_AUTO = {"𝗝𝗶𝗻𝗫 | VLESS", "𝗝𝗶𝗻𝗫 | VMess", "𝗝𝗶𝗻𝗫 | Trojan"}      # names of older versions -> renamed
+OLD_AUTO = {"VLESS", "VMess", "Trojan"}      # names of older versions -> renamed
 
-# 🌐 mirrors: more Railway domains for the same service (Settings > Domains). If an operator or a city ever blocks
-#    one domain name, the same server is still reachable through the others -> nothing goes down.
+# 🌐
+#    one
 _RW = os.environ.get("RAILWAY_PUBLIC_DOMAIN", "").strip()
 MIRRORS = [d for d in dict.fromkeys(_list("JINX_EXTRA_DOMAINS") + ([_RW] if _RW and DOMAIN and _RW != DOMAIN else []))
            if d and d != DOMAIN and "." in d]
@@ -130,7 +124,7 @@ def wanted(tag):
     out = []
     n = lambda r: name(r, tag)
     if HAS_RAILWAY_DOMAIN and tag in tunnel_tags():
-        for k, ip in enumerate(RELAY_IPS):                             # 🇮🇷 Iran relay = lowest ping
+        for k, ip in enumerate(RELAY_IPS):                             # low ping
             out.append(base(path, address=ip, port=RELAY_PORT, alpn=alpn, remark=n(R_RELAY + (f" {k + 1}" if len(RELAY_IPS) > 1 else ""))))
     if CF_HOST and tag in tunnel_tags():
         for k, ip in enumerate(CF_IPS):                                # ☁️ Cloudflare clean IPs x ports
@@ -158,7 +152,7 @@ def frag_of(profile):
     return FRAG if profile == "strong" else (FRAG_LIGHT or FRAG)
 
 # when an inbound is missing in this image, its methods move to the next best transport WITH THE SAME NAME,
-# so the 12 names never change and never repeat (XHTTP -> HTTPUpgrade -> WebSocket, HTTPUpgrade -> WebSocket)
+# commengt
 XH_TAGS = {"VLESS XHTTP", "VLESS XHTTP SU"}
 FALLBACK = {"VLESS XHTTP SU": ("VLESS XHTTP", "VLESS HTTPUPGRADE", "VLESS WS"), "VLESS XHTTP": ("VLESS HTTPUPGRADE", "VLESS WS"), "VLESS HTTPUPGRADE": ("VLESS WS",)}
 
