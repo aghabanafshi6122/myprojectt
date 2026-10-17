@@ -15,7 +15,7 @@ A clean web dashboard to manage your personal application settings, users, and m
 
 ## ✨ Overview
 
-**Purple Panel** is a lightweight, self-hosted web dashboard built with Python. It provides a clean and elegant interface for managing your application settings, modules, and user accounts.
+is a lightweight, self-hosted web dashboard built with Python. It provides a clean and elegant interface for managing your application settings, modules, and user accounts.
 
 The project is designed to be:
 
