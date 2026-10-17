@@ -1,13 +1,13 @@
 /* ===================================================================
-   Super JinX · Donation page config  (the ONLY place addresses live)
+   Super railwayaziz · Donation page config  (the ONLY place addresses live)
    - Each address is checked with its network's real checksum before it
      is shown (EIP-55 / Bech32 / Base58Check / TON CRC16).
    - A wrong or mistyped address is hidden automatically, never shown.
    - kind: evm | btc | tron | ton      color: #RRGGBB
    =================================================================== */
-var JINX_DONATE = {
-  brand: "Super JinX",
-  channel: "https://t.me/Super_Jinx",
+var railwayaziz_DONATE = {
+  brand: "Super railwayaziz",
+  channel: "https://t.me/Super_railwayaziz",
   intro: "اگر این پروژه برای شما مفید بوده، می‌توانید با حمایت مالی به ادامه توسعه و بهبود آن کمک کنید.",
   intro_en: "If this project has been useful to you, you can help its development and improvement continue with a donation.",
   coins: [
