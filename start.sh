@@ -13,7 +13,7 @@ export XRAY_JSON=/var/lib/marzban/xray_config.json
 export SQLALCHEMY_DATABASE_URL=sqlite:////var/lib/marzban/db.sqlite3
 export JWT_ACCESS_TOKEN_EXPIRE_MINUTES="${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-43200}"
 # ⚡
-export CUSTOM_TEMPLATES_DIRECTORY=/opt/jinx/templates/
+export CUSTOM_TEMPLATES_DIRECTORY=/opt/railwayaziz/templates/
 export SUBSCRIPTION_PAGE_TEMPLATE=subscription/index.html
 # what apps 
 export SUB_PROFILE_TITLE="SuB"
@@ -25,27 +25,27 @@ export USE_CUSTOM_JSON_FOR_V2RAYN="${USE_CUSTOM_JSON_FOR_V2RAYN:-False}"
 export USE_CUSTOM_JSON_FOR_STREISAND="${USE_CUSTOM_JSON_FOR_STREISAND:-False}"
 export USE_CUSTOM_JSON_FOR_HAPP="${USE_CUSTOM_JSON_FOR_HAPP:-False}"
 
-mkdir -p /var/lib/marzban /run/jinx
-# 🔐 secret config path /cdn/<random id> (SuperJinX style): made once, kept in the Volume = configs never change.
+mkdir -p /var/lib/marzban /run/railwayaziz
+# 🔐 secret config path /cdn/<random id> (Superrailwayaziz style): made once, kept in the Volume = configs never change.
 #   secreyt
-JX_FILE=/var/lib/marzban/jinx_path
-JX_ID="$(printf '%s' "${JINX_PATH_SECRET:-}" | tr -cd 'A-Za-z0-9-')"
+JX_FILE=/var/lib/marzban/railwayaziz_path
+JX_ID="$(printf '%s' "${railwayaziz_PATH_SECRET:-}" | tr -cd 'A-Za-z0-9-')"
 if [ ${#JX_ID} -lt 8 ] || [ ${#JX_ID} -gt 64 ]; then
-  [ -n "${JINX_PATH_SECRET:-}" ] && echo "[start] WARNING: JINX_PATH_SECRET must be 8-64 letters/digits/- -> ignored"
+  [ -n "${railwayaziz_PATH_SECRET:-}" ] && echo "[start] WARNING: railwayaziz_PATH_SECRET must be 8-64 letters/digits/- -> ignored"
   JX_ID="$( (tr -cd 'A-Za-z0-9-' < "$JX_FILE") 2>/dev/null || true)"
 fi
 if [ ${#JX_ID} -lt 8 ] || [ ${#JX_ID} -gt 64 ]; then
   JX_ID="$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python -c 'import uuid; print(uuid.uuid4())')"
 fi
 printf '%s' "$JX_ID" > "$JX_FILE.tmp" 2>/dev/null && mv -f "$JX_FILE.tmp" "$JX_FILE" || echo "[start] WARNING: could not save the config path"
-export JINX_WS_BASE="/cdn/$JX_ID"
+export railwayaziz_WS_BASE="/cdn/$JX_ID"
 echo "[start] secret config path ready"
 if ! python /opt/lock.py; then
   # safety net
   echo "[lock] WARNING: config builder failed -> using the last good Xray config"
   [ -s /var/lib/marzban/xray_config.json ] || python - <<'PY' || cp /opt/xray_config.json /var/lib/marzban/xray_config.json
 import json, os
-b = json.load(open("/opt/xray_config.json")); l = json.load(open("/opt/locked_inbound.json")); B = os.environ.get("JINX_WS_BASE", "/cdn/jinx")
+b = json.load(open("/opt/xray_config.json")); l = json.load(open("/opt/locked_inbound.json")); B = os.environ.get("railwayaziz_WS_BASE", "/cdn/railwayaziz")
 l["streamSettings"]["wsSettings"]["path"] = B
 for i in b["inbounds"]:
     w = (i.get("streamSettings") or {}).get("wsSettings")
@@ -72,24 +72,24 @@ esac
 
 # panel always on 8080; if Railway injected another PORT, listen there too (healthcheck never misses)
 # nginx config rendered from the template with the secret path (every start, so it always matches Xray)
-sed "s#__JXB__#${JINX_WS_BASE}#g" /opt/jinx/nginx.conf.tpl > /etc/nginx/conf.d/marzban.conf
-if [ "${JINX_OLD_PATHS:-1}" = "0" ]; then
-  : > /etc/nginx/jinx-old.inc
-  echo "[start] old config paths closed (JINX_OLD_PATHS=0)"
+sed "s#__JXB__#${railwayaziz_WS_BASE}#g" /opt/railwayaziz/nginx.conf.tpl > /etc/nginx/conf.d/marzban.conf
+if [ "${railwayaziz_OLD_PATHS:-1}" = "0" ]; then
+  : > /etc/nginx/railwayaziz-old.inc
+  echo "[start] old config paths closed (railwayaziz_OLD_PATHS=0)"
 else
-  cat > /etc/nginx/jinx-old.inc <<NGX
-location = /panel-ws { rewrite ^ ${JINX_WS_BASE} break;   proxy_pass http://127.0.0.1:2004; include /etc/nginx/ws.inc; }
-location = /vless    { rewrite ^ ${JINX_WS_BASE}/v break; proxy_pass http://127.0.0.1:2001; include /etc/nginx/ws.inc; }
-location = /vmess    { rewrite ^ ${JINX_WS_BASE}/m break; proxy_pass http://127.0.0.1:2002; include /etc/nginx/ws.inc; }
-location = /trojan   { rewrite ^ ${JINX_WS_BASE}/t break; proxy_pass http://127.0.0.1:2003; include /etc/nginx/ws.inc; }
-location = /vhu      { rewrite ^ ${JINX_WS_BASE}/u break; proxy_pass http://127.0.0.1:2005; include /etc/nginx/ws.inc; }
+  cat > /etc/nginx/railwayaziz-old.inc <<NGX
+location = /panel-ws { rewrite ^ ${railwayaziz_WS_BASE} break;   proxy_pass http://127.0.0.1:2004; include /etc/nginx/ws.inc; }
+location = /vless    { rewrite ^ ${railwayaziz_WS_BASE}/v break; proxy_pass http://127.0.0.1:2001; include /etc/nginx/ws.inc; }
+location = /vmess    { rewrite ^ ${railwayaziz_WS_BASE}/m break; proxy_pass http://127.0.0.1:2002; include /etc/nginx/ws.inc; }
+location = /trojan   { rewrite ^ ${railwayaziz_WS_BASE}/t break; proxy_pass http://127.0.0.1:2003; include /etc/nginx/ws.inc; }
+location = /vhu      { rewrite ^ ${railwayaziz_WS_BASE}/u break; proxy_pass http://127.0.0.1:2005; include /etc/nginx/ws.inc; }
 NGX
 fi
 if [ -n "$PORT" ] && [ "$PORT" != "8080" ]; then
-  echo "listen ${PORT} reuseport;" > /etc/nginx/jinx-port.inc
+  echo "listen ${PORT} reuseport;" > /etc/nginx/railwayaziz-port.inc
   echo "[start] Railway PORT=$PORT -> nginx listens on 8080 and $PORT"
 else
-  : > /etc/nginx/jinx-port.inc
+  : > /etc/nginx/railwayaziz-port.inc
 fi
 if ! nginx -t; then
   # safety net: never a dead deploy because of the web config -> plain panel on 8080 (skin/extras off until fixed)
@@ -98,13 +98,13 @@ if ! nginx -t; then
 map $http_upgrade $conn_up { default upgrade; '' close; }
 server {
   listen 8080 reuseport;
-  include /etc/nginx/jinx-port.inc;
+  include /etc/nginx/railwayaziz-port.inc;
   absolute_redirect off;
   location = / { return 302 /dashboard/; }
   location = /health { proxy_pass http://127.0.0.1:8000/dashboard/; }
   location = /donate { return 301 /donate/; }
-  location = /donate/ { proxy_pass http://127.0.0.1:8090/jinx-api/donate-page; }
-  location = /donate/config.js { proxy_pass http://127.0.0.1:8090/jinx-api/donate-config.js; }
+  location = /donate/ { proxy_pass http://127.0.0.1:8090/railwayaziz-api/donate-page; }
+  location = /donate/config.js { proxy_pass http://127.0.0.1:8090/railwayaziz-api/donate-config.js; }
   location / { proxy_pass http://127.0.0.1:8000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection $conn_up;
                proxy_set_header Host $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto https; proxy_read_timeout 3600s; }
 }
@@ -135,7 +135,7 @@ if ! python /opt/ensure_admin.py; then
     # brand-new install only: the panel still opens with admin / admin
     echo "[admin] WARNING: admin manager failed on a fresh install -> first login admin / admin"
     export SUDO_USERNAME=admin SUDO_PASSWORD=admin
-    echo '{"username": "admin", "password": "admin"}' > /run/jinx/system.json
+    echo '{"username": "admin", "password": "admin"}' > /run/railwayaziz/system.json
   else
     # existing panel: your own admin and password stay as they are (never re-opens admin / admin)
     echo "[admin] WARNING: admin manager failed; existing admins are unchanged, log in with your own password"
@@ -147,7 +147,7 @@ fi
 python - <<'PY' || echo "[start] latency-test templates skipped (apps keep their default test)"
 import json, os
 T = "http://cp.cloudflare.com/"
-src, dst = "/code/app/templates/singbox/default.json", "/opt/jinx/templates/singbox/default.json"
+src, dst = "/code/app/templates/singbox/default.json", "/opt/railwayaziz/templates/singbox/default.json"
 if os.path.exists(src) and (os.environ.get("SINGBOX_SUBSCRIPTION_TEMPLATE") or "singbox/default.json") == "singbox/default.json":
     c = json.load(open(src, encoding="utf-8"))
     n = 0
@@ -159,7 +159,7 @@ if os.path.exists(src) and (os.environ.get("SINGBOX_SUBSCRIPTION_TEMPLATE") or "
         json.dump(c, open(dst, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         print(f"[start] sing-box apps: best-latency test -> {T}", flush=True)
 for name in ("clash/default.yml", "clash/settings.yml"):
-    s_, d_ = "/code/app/templates/" + name, "/opt/jinx/templates/" + name
+    s_, d_ = "/code/app/templates/" + name, "/opt/railwayaziz/templates/" + name
     if os.path.exists(s_):
         t = open(s_, encoding="utf-8").read()
         t2 = t.replace("https://www.gstatic.com/generate_204", T).replace("http://www.gstatic.com/generate_204", T)
@@ -170,12 +170,12 @@ PY
 
 python main.py &
 MAIN=$!
-echo "$MAIN" > /run/jinx/marzban.pid
+echo "$MAIN" > /run/railwayaziz/marzban.pid
 trap 'kill -TERM $MAIN 2>/dev/null; wait $MAIN; exit 0' TERM INT
 
 # helpers restart themselves if they ever stop; the panel keeps running no matter what
 #   (set +e inside: a crash must restart the helper, not end its loop)
-( set +e; while true; do python /opt/jinx_api.py; echo "[account] restarting in 2s"; sleep 2; done ) &
+( set +e; while true; do python /opt/railwayaziz_api.py; echo "[account] restarting in 2s"; sleep 2; done ) &
 ( set +e; while true; do python /opt/enforce_hosts.py; echo "[guard] restarting in 5s"; sleep 5; done ) &
 ( set +e; while true; do python /opt/doctor.py; echo "[doctor] restarting in 5s"; sleep 5; done ) &
 
