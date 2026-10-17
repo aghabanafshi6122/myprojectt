@@ -15,29 +15,29 @@ RUN ( curl -fsSL --retry 3 --retry-delay 2 -o /usr/local/bin/cloudflared https:/
 COPY ws.inc /etc/nginx/ws.inc
 COPY gate.inc /etc/nginx/gate.inc
 COPY nginx.conf /etc/nginx/conf.d/marzban.conf
-COPY nginx.conf /opt/jinx/nginx.conf.tpl
-COPY xray_config.json locked_inbound.json lock.py enforce_hosts.py ensure_admin.py doctor.py jinx_api.py /opt/
-COPY jinx.css jinx.js donate.html donate-config.js /opt/jinx/
-COPY sub.html /opt/jinx/templates/subscription/index.html
-COPY sub.html /opt/jinx/sub.golden.html
-COPY donate.html /opt/jinx/donate.golden.html
-COPY donate-config.js /opt/jinx/donate-config.golden.js
+COPY nginx.conf /opt/railwayaziz/nginx.conf.tpl
+COPY xray_config.json locked_inbound.json lock.py enforce_hosts.py ensure_admin.py doctor.py railwayaziz_api.py /opt/
+COPY railwayaziz.css railwayaziz.js donate.html donate-config.js /opt/railwayaziz/
+COPY sub.html /opt/railwayaziz/templates/subscription/index.html
+COPY sub.html /opt/railwayaziz/sub.golden.html
+COPY donate.html /opt/railwayaziz/donate.golden.html
+COPY donate-config.js /opt/railwayaziz/donate-config.golden.js
 
 # QR codes for the subscription page are made on our own server (no external site). Never fails the build.
 RUN pip install --no-cache-dir segno==1.6.6 || echo "segno install skipped, QR button will hide itself"
 
 # Persian font bundled inside the image (works even when Google Fonts is blocked). Never fails the build.
-RUN mkdir -p /opt/jinx/fonts \
+RUN mkdir -p /opt/railwayaziz/fonts \
  && ( curl -fsSL -o /tmp/vz.zip https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip \
       && mkdir -p /tmp/vz && cd /tmp/vz && python -c "import zipfile; zipfile.ZipFile('/tmp/vz.zip').extractall('.')" \
-      && for w in Regular Medium Bold; do f=$(find /tmp/vz -name "Vazirmatn-$w.woff2" | head -1); [ -n "$f" ] && cp "$f" /opt/jinx/fonts/; done \
+      && for w in Regular Medium Bold; do f=$(find /tmp/vz -name "Vazirmatn-$w.woff2" | head -1); [ -n "$f" ] && cp "$f" /opt/railwayaziz/fonts/; done \
       ; rm -rf /tmp/vz /tmp/vz.zip ) || echo "font download skipped, using system font" \
- && ls /opt/jinx/fonts
+ && ls /opt/railwayaziz/fonts
 COPY start.sh /start.sh
 
 # fix Windows line endings, just in case
-RUN sed -i 's/\r$//' /start.sh /opt/*.py /opt/*.json /opt/jinx/jinx.css /opt/jinx/jinx.js /opt/jinx/donate.html /opt/jinx/donate-config.js /opt/jinx/templates/subscription/index.html /opt/jinx/sub.golden.html /opt/jinx/donate.golden.html /opt/jinx/donate-config.golden.js /etc/nginx/ws.inc /etc/nginx/gate.inc /etc/nginx/conf.d/marzban.conf /opt/jinx/nginx.conf.tpl \
- && chmod +x /start.sh && chmod -R a+rX /opt/jinx
+RUN sed -i 's/\r$//' /start.sh /opt/*.py /opt/*.json /opt/railwayaziz/railwayaziz.css /opt/railwayaziz/railwayaziz.js /opt/railwayaziz/donate.html /opt/railwayaziz/donate-config.js /opt/railwayaziz/templates/subscription/index.html /opt/railwayaziz/sub.golden.html /opt/railwayaziz/donate.golden.html /opt/railwayaziz/donate-config.golden.js /etc/nginx/ws.inc /etc/nginx/gate.inc /etc/nginx/conf.d/marzban.conf /opt/railwayaziz/nginx.conf.tpl \
+ && chmod +x /start.sh && chmod -R a+rX /opt/railwayaziz
 
 ENV PORT=8080 \
     UVICORN_HOST=127.0.0.1 \
@@ -45,7 +45,7 @@ ENV PORT=8080 \
     XRAY_JSON=/var/lib/marzban/xray_config.json \
     SQLALCHEMY_DATABASE_URL=sqlite:////var/lib/marzban/db.sqlite3 \
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES=43200 \
-    CUSTOM_TEMPLATES_DIRECTORY=/opt/jinx/templates/ \
+    CUSTOM_TEMPLATES_DIRECTORY=/opt/railwayaziz/templates/ \
     SUBSCRIPTION_PAGE_TEMPLATE=subscription/index.html
 EXPOSE 8080
 ENTRYPOINT ["/start.sh"]
