@@ -16,16 +16,16 @@ try:
                 HTTP_ONLY.add(ib["tag"])
 except Exception as e:
     print(f"[doctor] could not read xray config: {e}", flush=True)
-    PORTS.update({"jinx-inbound": 2004, "vless": 2001, "vmess": 2002, "trojan": 2003})
-    _b = "/cdn/" + (open("/var/lib/marzban/jinx_path").read().strip() if os.path.exists("/var/lib/marzban/jinx_path") else "jinx")
-    WS_PATHS.update({"jinx-inbound": _b, "vless": _b + "/v", "vmess": _b + "/m", "trojan": _b + "/t"})
+    PORTS.update({"railwayaziz-inbound": 2004, "vless": 2001, "vmess": 2002, "trojan": 2003})
+    _b = "/cdn/" + (open("/var/lib/marzban/railwayaziz_path").read().strip() if os.path.exists("/var/lib/marzban/railwayaziz_path") else "railwayaziz")
+    WS_PATHS.update({"railwayaziz-inbound": _b, "vless": _b + "/v", "vmess": _b + "/m", "trojan": _b + "/t"})
 
 def log(msg):
     print(f"[doctor] {msg}", flush=True)
     if TG_TOKEN and TG_CHAT:
         try:
             urllib.request.urlopen(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
-                urllib.parse.urlencode({"chat_id": TG_CHAT, "text": "⚡ Super JinX\n" + msg}).encode(), timeout=8)
+                urllib.parse.urlencode({"chat_id": TG_CHAT, "text": "⚡ Super railwayaziz\n" + msg}).encode(), timeout=8)
         except Exception:
             pass
 
@@ -54,12 +54,12 @@ def ws_ok(path):
         return False
 
 
-SUB_T, SUB_G = "/opt/jinx/templates/subscription/index.html", "/opt/jinx/sub.golden.html"
+SUB_T, SUB_G = "/opt/railwayaziz/templates/subscription/index.html", "/opt/railwayaziz/sub.golden.html"
 
 def sub_ok():
     try:
         t = open(SUB_T, encoding="utf-8").read()
-        if 'id="jinx-data"' not in t or "</html>" not in t:
+        if 'id="railwayaziz-data"' not in t or "</html>" not in t:
             return False
         try:
             import jinja2
@@ -81,7 +81,7 @@ def sub_heal():
     except Exception as e:
         log(f"subscription page restore failed: {e}")
 
-DON_T, DON_G = "/opt/jinx/donate.html", "/opt/jinx/donate.golden.html"
+DON_T, DON_G = "/opt/railwayaziz/donate.html", "/opt/railwayaziz/donate.golden.html"
 
 def don_heal():
     """donation page missing or cut -> restored from its golden copy (the config file is never touched: it holds your addresses)"""
@@ -98,7 +98,7 @@ def don_heal():
     except Exception as e:
         log(f"donation page restore failed: {e}")
 
-BK_DIR = "/var/lib/marzban/jinx_backups"
+BK_DIR = "/var/lib/marzban/railwayaziz_backups"
 
 def daily_backup():
     """online sqlite backup (safe while the panel is running) + agency data, keeps the newest 7"""
@@ -115,7 +115,7 @@ def daily_backup():
     finally:
         dst.close(); src.close()
     os.replace(tmp, tmp[:-4])
-    for f in ("/var/lib/marzban/jinx_resellers.json",):
+    for f in ("/var/lib/marzban/railwayaziz_resellers.json",):
         if os.path.exists(f):
             shutil.copyfile(f, os.path.join(BK_DIR, f"agency-{stamp}.json"))
     for prefix in ("db-", "agency-"):
@@ -128,7 +128,7 @@ def daily_backup():
     print(f"[doctor] daily backup saved ({stamp})", flush=True)
 
 def token():
-    data = urllib.parse.urlencode(json.load(open("/run/jinx/system.json"))).encode()
+    data = urllib.parse.urlencode(json.load(open("/run/railwayaziz/system.json"))).encode()
     r = urllib.request.urlopen(urllib.request.Request(API + "/api/admin/token", data=data), timeout=8)
     return json.loads(r.read())["access_token"]
 
@@ -194,9 +194,9 @@ def write_status(parts):
           "ram": {"used_mb": used // 2**20, "limit_mb": limit // 2**20, "percent": round(used * 100 / limit, 1) if limit else 0},
           "auto_fixes": STATUS["fixes"], "last_fix": STATUS["last_fix"]}
     try:
-        tmp = "/run/jinx/status.json.tmp"
+        tmp = "/run/railwayaziz/status.json.tmp"
         json.dump(st, open(tmp, "w"), ensure_ascii=False, indent=1); os.chmod(tmp, 0o644)
-        os.replace(tmp, "/run/jinx/status.json")
+        os.replace(tmp, "/run/railwayaziz/status.json")
     except Exception:
         pass
 
@@ -238,7 +238,7 @@ while True:
         if panel_fail >= 3:
             log("panel frozen -> restarting container")
             try:
-                os.kill(int(open("/run/jinx/marzban.pid").read().strip()), signal.SIGKILL)
+                os.kill(int(open("/run/railwayaziz/marzban.pid").read().strip()), signal.SIGKILL)
             except Exception as e:
                 log(f"could not stop panel: {e}")
             panel_fail = 0
