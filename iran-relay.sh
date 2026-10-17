@@ -16,15 +16,15 @@ rm -f /etc/nginx/sites-enabled/default
 LISTEN=""
 for p in $PORTS; do LISTEN="$LISTEN    listen $p reuseport so_keepalive=on;\n"; done
 
-cat > /etc/nginx/jinx-relay.conf <<CONF
-# ⚡ Super JinX relay -> $DOMAIN (TLS passthrough, nothing is decrypted here)
+cat > /etc/nginx/railwayaziz-relay.conf <<CONF
+# ⚡ Super railwayaziz relay -> $DOMAIN (TLS passthrough, nothing is decrypted here)
 stream {
     resolver 8.8.8.8 1.1.1.1 178.22.122.100 valid=60s ipv6=off;
     resolver_timeout 5s;
-    map \$remote_addr \$jinx_up { default "$DOMAIN:443"; }
+    map \$remote_addr \$railwayaziz_up { default "$DOMAIN:443"; }
     server {
 $(printf "$LISTEN")
-        proxy_pass \$jinx_up;
+        proxy_pass \$railwayaziz_up;
         proxy_connect_timeout 5s;
         proxy_timeout 1h;
         proxy_buffer_size 64k;          # bigger chunks = higher speed on the long Iran -> Amsterdam path
@@ -34,10 +34,10 @@ $(printf "$LISTEN")
 CONF
 
 # include the stream block at top level of nginx.conf (once)
-grep -q "jinx-relay.conf" /etc/nginx/nginx.conf || echo "include /etc/nginx/jinx-relay.conf;" >> /etc/nginx/nginx.conf
+grep -q "railwayaziz-relay.conf" /etc/nginx/nginx.conf || echo "include /etc/nginx/railwayaziz-relay.conf;" >> /etc/nginx/nginx.conf
 
 echo "== network tuning (BBR + fast open) =="
-cat > /etc/sysctl.d/99-jinx.conf <<SYS
+cat > /etc/sysctl.d/99-railwayaziz.conf <<SYS
 net.core.default_qdisc=fq
 net.ipv4.tcp_congestion_control=bbr
 net.ipv4.tcp_fastopen=3
