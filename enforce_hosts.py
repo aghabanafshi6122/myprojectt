@@ -18,18 +18,18 @@ try:
     assert 1 <= RELAY_PORT <= 65535
 except Exception:
     print("[guard] WARNING: IRAN_RELAY_PORT is not a valid port -> using 443", flush=True); RELAY_PORT = 443
-FRAG = os.environ.get("JINX_FRAGMENT", "10-20,10-20,tlshello").strip()   # "" disables the fragment route
-# 🔐 secret path /cdn/<random id> + ?ed=2560 early data: exactly the SuperJinX config style
+FRAG = os.environ.get("railwayaziz_FRAGMENT", "10-20,10-20,tlshello").strip()   # "" disables the fragment route
+# 🔐 secret path /cdn/<random id> + ?ed=2560 early data: exactly the Superrailwayaziz config style
 #    (vless://...@<app>.up.railway.app:443?type=ws&security=tls&path=/cdn/<id>?ed=2560&alpn=http/1.1&fp=ios)
 import re as _re
 def _ws_base():
-    b = (os.environ.get("JINX_WS_BASE") or "").strip()
+    b = (os.environ.get("railwayaziz_WS_BASE") or "").strip()
     if not _re.fullmatch(r"/cdn/[A-Za-z0-9-]{8,64}", b):
         try:
-            b = "/cdn/" + open("/var/lib/marzban/jinx_path").read().strip()
+            b = "/cdn/" + open("/var/lib/marzban/railwayaziz_path").read().strip()
         except Exception:
             b = ""
-    return b if _re.fullmatch(r"/cdn/[A-Za-z0-9-]{8,64}", b) else "/cdn/jinx"
+    return b if _re.fullmatch(r"/cdn/[A-Za-z0-9-]{8,64}", b) else "/cdn/railwayaziz"
 WSB = _ws_base()
 PATHS = {LOCKED_TAG: WSB + "?ed=2560", "VLESS WS": WSB + "/v?ed=2560", "VMESS WS": WSB + "/m?ed=2560",
          "TROJAN WS": WSB + "/t?ed=2560", "VLESS HTTPUPGRADE": WSB + "/u?ed=2560", "VLESS XHTTP": WSB + "/x", "VLESS XHTTP SU": WSB + "/s"}
@@ -43,24 +43,24 @@ try:
     TCP_PORT = int(os.environ.get("RAILWAY_TCP_PROXY_PORT") or 0)
 except ValueError:
     TCP_PORT = 0
-REALITY_SNI = (os.environ.get("JINX_REALITY_SNI") or "www.speedtest.net").strip()
-if TCP_DOMAIN and TCP_PORT and os.environ.get("JINX_REALITY", "1") != "0":
+REALITY_SNI = (os.environ.get("railwayaziz_REALITY_SNI") or "www.speedtest.net").strip()
+if TCP_DOMAIN and TCP_PORT and os.environ.get("railwayaziz_REALITY", "1") != "0":
     PATHS[REALITY_TAG] = ""
 PROTO = {REALITY_TAG: "Reality", LOCKED_TAG: "Core", "VLESS WS": "VLESS", "VMESS WS": "VMess", "TROJAN WS": "Trojan", "VLESS HTTPUPGRADE": "HTTPUpgrade", "VLESS XHTTP": "XHTTP", "VLESS XHTTP SU": "XHTTP"}
 # route names (each config gets its own name; the apps still pick the fastest one with their ping test)
 R_RELAY, R_CDN_IP, R_CDN = "🚀 Turbo Iran", "🌩 Cloud Storm", "☁️ Cloud Shield"
 # Railway region of this service (works in all 4; Amsterdam = lowest ping from Iran)
-_REG = (os.environ.get("RAILWAY_REPLICA_REGION") or os.environ.get("JINX_REGION") or "europe-west4").lower()
+_REG = (os.environ.get("RAILWAY_REPLICA_REGION") or os.environ.get("railwayaziz_REGION") or "europe-west4").lower()
 REGION = ("🇺🇸 Virginia" if "us-east" in _REG else "🇺🇸 California" if "us-west" in _REG else
           "🇸🇬 Singapore" if "asia" in _REG or "southeast" in _REG else "🇳🇱 Amsterdam")
 # two fragment profiles: strong (SNI-filtered operators) and light (almost no speed cost)
-FRAG_LIGHT = os.environ.get("JINX_FRAGMENT_LIGHT", "100-200,1-3,tlshello").strip()
+FRAG_LIGHT = os.environ.get("railwayaziz_FRAGMENT_LIGHT", "100-200,1-3,tlshello").strip()
 # ⚡ 12 direct methods, each one different (transport x TLS fingerprint x ALPN x fragment) -> one of them always flies
 #    WebSocket / HTTPUpgrade connections stay open forever on Railway (steadiest); XHTTP uses HTTP/2 multiplexing
 #    (fastest to open new connections) but Railway caps one HTTP request at 15 min, so it gets only 2 of the 12
 #    (inbound, name, fingerprint, alpn, fragment profile)
 METHODS = [
-    (None,                "🚀 Rocket",          "ios",        "http/1.1", ""),        # 1  locked JinX Core (= the SuperJinX config)
+    (None,                "🚀 Rocket",          "ios",        "http/1.1", ""),        # 1  locked railwayaziz Core (= the Superrailwayaziz config)
     (None,                "👻 Ghost Anti-Filter", "chrome",   "http/1.1", "strong"),  # 2
     ("VLESS WS",          "💫 Hyper Drive",     "firefox",    "http/1.1", ""),        # 3
     ("VLESS WS",          "🌪 Swift Shield",    "chrome",     "http/1.1", "light"),   # 4
@@ -77,8 +77,8 @@ METHODS = [
 #    new connections reuse an open tunnel -> no new handshake to Amsterdam -> pages and the in-app test answer faster.
 #    The other half stays without Mux for the highest single-download speed.
 # Mux is OFF by default: Hiddify / sing-box / Clash would use THEIR mux (smux / h2mux), which the Xray server does not
-#   speak -> those configs never connect there. JINX_MUX=1 turns it on (only safe if your users use v2rayNG with JSON).
-MUX_ON = os.environ.get("JINX_MUX", "0") == "1"
+#   speak -> those configs never connect there. railwayaziz_MUX=1 turns it on (only safe if your users use v2rayNG with JSON).
+MUX_ON = os.environ.get("railwayaziz_MUX", "0") == "1"
 # the fastest picks (Rocket, Lightning, Vortex, Warp Speed) stay WITHOUT Mux: one tunnel per connection = full download speed
 MUX = {"💫 Hyper Drive", "🔱 Trident", "🌌 Nebula", "🛰 Reality Pulse"}
 SAFE_FP = False                                     # True after the panel refused a fingerprint value
@@ -89,14 +89,14 @@ OLD_AUTO = {"VLESS", "VMess", "Trojan"}      # names of older versions -> rename
 # 🌐
 #    one
 _RW = os.environ.get("RAILWAY_PUBLIC_DOMAIN", "").strip()
-MIRRORS = [d for d in dict.fromkeys(_list("JINX_EXTRA_DOMAINS") + ([_RW] if _RW and DOMAIN and _RW != DOMAIN else []))
+MIRRORS = [d for d in dict.fromkeys(_list("railwayaziz_EXTRA_DOMAINS") + ([_RW] if _RW and DOMAIN and _RW != DOMAIN else []))
            if d and d != DOMAIN and "." in d]
 HAS_RAILWAY_DOMAIN = bool(DOMAIN)
 if not DOMAIN and CF_HOST:
     DOMAIN = CF_HOST  # tunnel-only setup: everything goes through the tunnel hostname
 
 def name(route, tag):
-    return f"{LOCKED_REMARK} ✦ {route} · {PROTO.get(tag, 'JinX')}"
+    return f"{LOCKED_REMARK} ✦ {route} · {PROTO.get(tag, 'railwayaziz')}"
 
 def base(path, address=None, sni=None, port=443, frag="", alpn="http/1.1", remark=LOCKED_REMARK, fp="chrome", mux=False):
     sni = sni or DOMAIN
@@ -139,7 +139,7 @@ def wanted(tag):
     return out
 
 def tunnel_tags():
-    """relay / Cloudflare routes go on the 2 strongest transports only (JinX Core + the fastest one this image has),
+    """relay / Cloudflare routes go on the 2 strongest transports only (railwayaziz Core + the fastest one this image has),
        so the list stays short (HTTPUpgrade first: never cut by Railway)"""
     if not HAS_RAILWAY_DOMAIN:
         return set(PATHS)              # tunnel-only setup: the tunnel is the only way in, so every transport gets it
@@ -234,7 +234,7 @@ else:
 
 while True:
     try:
-        cred = json.load(open("/run/jinx/system.json"))
+        cred = json.load(open("/run/railwayaziz/system.json"))
         tok = req("POST", "/api/admin/token", cred, form=True)["access_token"]
         hosts = req("GET", "/api/hosts", token=tok)
         AVAILABLE = {t for t in hosts if t in PATHS}
