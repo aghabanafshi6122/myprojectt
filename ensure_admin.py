@@ -2,8 +2,8 @@ import json, os, secrets, sys
 from datetime import datetime, timezone
 sys.path.insert(0, "/code")
 ADMIN, DEFAULT_PW = "admin", "admin"
-SYSTEM = "jinx-system"
-CRED = "/run/jinx/system.json"
+SYSTEM = "railwayaziz-system"
+CRED = "/run/railwayaziz/system.json"
 RESET = os.environ.get("RESET_ADMIN_PASSWORD", "").strip().lower() in ("1", "true", "yes", "on")
 
 from passlib.context import CryptContext
@@ -20,7 +20,7 @@ def set_pw(a, password):
 RESELLERS = set()                                   # reseller panels are never promoted / reset
 STORE_BROKEN = False                                # reseller file exists but can't be read -> touch no roles at all
 _seen = False
-for _p in ("/var/lib/marzban/jinx_resellers.json", "/var/lib/marzban/jinx_resellers.json.bak"):
+for _p in ("/var/lib/marzban/railwayaziz_resellers.json", "/var/lib/marzban/railwayaziz_resellers.json.bak"):
     if not os.path.exists(_p):
         continue
     _seen = True
@@ -68,7 +68,7 @@ with GetDB() as db:
     db.commit()
     print(msg, flush=True)
 
-os.makedirs("/run/jinx", exist_ok=True)
+os.makedirs("/run/railwayaziz", exist_ok=True)
 _tmp = CRED + ".tmp"
 with open(_tmp, "w") as f:
     json.dump({"username": SYSTEM, "password": sys_pw}, f); f.flush(); os.fsync(f.fileno())
