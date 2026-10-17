@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
-echo "=== ⚡ Super JinX | Marzban on Railway ==="
-# ⚡ more open connections for nginx + Xray (many users / many tabs at once), never fatal
+echo "=== Railway ==="
+# ⚡
 ulimit -n 65535 2>/dev/null || ulimit -n "$(ulimit -Hn)" 2>/dev/null || true
 
-# No hard-coded env login: the admin lives in the database, so a password changed in the panel really works.
 # (first install = admin / admin, see ensure_admin.py)
 unset SUDO_USERNAME SUDO_PASSWORD
 # internal wiring is forced too, so a wrong Railway variable can never break the panel
@@ -13,16 +12,14 @@ export UVICORN_PORT=8000
 export XRAY_JSON=/var/lib/marzban/xray_config.json
 export SQLALCHEMY_DATABASE_URL=sqlite:////var/lib/marzban/db.sqlite3
 export JWT_ACCESS_TOKEN_EXPIRE_MINUTES="${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-43200}"
-# ⚡ our own subscription page (sub.html)
+# ⚡
 export CUSTOM_TEMPLATES_DIRECTORY=/opt/jinx/templates/
 export SUBSCRIPTION_PAGE_TEMPLATE=subscription/index.html
-# what apps see when they fetch the subscription: title, support link, auto-update every 6h
-export SUB_PROFILE_TITLE="Super JinX"
-export SUB_SUPPORT_URL="https://t.me/Super_Jinx"
+# what apps 
+export SUB_PROFILE_TITLE="SuB"
+export SUB_SUPPORT_URL="https://t.me/"
 export SUB_UPDATE_INTERVAL="${SUB_UPDATE_INTERVAL:-6}"
-# 🔗 every app gets plain share links (the same way the SuperJinX panels that ping well do it):
-#    the app builds its own config, so no panel JSON template can ever break the connection.
-#    Set USE_CUSTOM_JSON_FOR_V2RAYNG=True (etc.) in Railway Variables to switch back to full JSON.
+# 🔗
 export USE_CUSTOM_JSON_FOR_V2RAYNG="${USE_CUSTOM_JSON_FOR_V2RAYNG:-False}"
 export USE_CUSTOM_JSON_FOR_V2RAYN="${USE_CUSTOM_JSON_FOR_V2RAYN:-False}"
 export USE_CUSTOM_JSON_FOR_STREISAND="${USE_CUSTOM_JSON_FOR_STREISAND:-False}"
@@ -30,7 +27,7 @@ export USE_CUSTOM_JSON_FOR_HAPP="${USE_CUSTOM_JSON_FOR_HAPP:-False}"
 
 mkdir -p /var/lib/marzban /run/jinx
 # 🔐 secret config path /cdn/<random id> (SuperJinX style): made once, kept in the Volume = configs never change.
-#    JINX_PATH_SECRET in Railway Variables sets your own id (8-64 letters / digits / -).
+#   secreyt
 JX_FILE=/var/lib/marzban/jinx_path
 JX_ID="$(printf '%s' "${JINX_PATH_SECRET:-}" | tr -cd 'A-Za-z0-9-')"
 if [ ${#JX_ID} -lt 8 ] || [ ${#JX_ID} -gt 64 ]; then
@@ -44,7 +41,7 @@ printf '%s' "$JX_ID" > "$JX_FILE.tmp" 2>/dev/null && mv -f "$JX_FILE.tmp" "$JX_F
 export JINX_WS_BASE="/cdn/$JX_ID"
 echo "[start] secret config path ready"
 if ! python /opt/lock.py; then
-  # safety net: never a dead deploy because of the config builder -> last good config, else the plain repo config
+  # safety net
   echo "[lock] WARNING: config builder failed -> using the last good Xray config"
   [ -s /var/lib/marzban/xray_config.json ] || python - <<'PY' || cp /opt/xray_config.json /var/lib/marzban/xray_config.json
 import json, os
