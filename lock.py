@@ -43,13 +43,13 @@ def inbound(tag, port, net, settings):
 
 # 🔐 secret config path: /cdn/<random id> (start.sh makes it once and keeps it in the Volume)
 def ws_base():
-    b = (os.environ.get("JINX_WS_BASE") or "").strip()
+    b = (os.environ.get("railwayaziz_WS_BASE") or "").strip()
     if not re.fullmatch(r"/cdn/[A-Za-z0-9-]{8,64}", b):
         try:
-            b = "/cdn/" + open("/var/lib/marzban/jinx_path").read().strip()
+            b = "/cdn/" + open("/var/lib/marzban/railwayaziz_path").read().strip()
         except Exception:
             b = ""
-    return b if re.fullmatch(r"/cdn/[A-Za-z0-9-]{8,64}", b) else "/cdn/jinx"
+    return b if re.fullmatch(r"/cdn/[A-Za-z0-9-]{8,64}", b) else "/cdn/railwayaziz"
 B = ws_base()
 SUB = {"VLESS WS": "/v", "VMESS WS": "/m", "TROJAN WS": "/t"}
 locked["streamSettings"]["wsSettings"]["path"] = B
@@ -61,7 +61,7 @@ print(f"[lock] secret config path ready ({B[:9]}…)", flush=True)
 
 ver = xray_version()
 extra = []
-if os.environ.get("JINX_FAST", "1") != "0":
+if os.environ.get("railwayaziz_FAST", "1") != "0":
     # HTTPUpgrade: same path as WS through Railway/Cloudflare, but lighter (no WS framing) -> faster
     if ver >= (1, 8, 9) and marzban_knows("httpupgrade"):
         extra.append(inbound("VLESS HTTPUPGRADE", 2005, "httpupgrade", {"httpupgradeSettings": {"path": B + "/u"}}))
@@ -69,8 +69,8 @@ if os.environ.get("JINX_FAST", "1") != "0":
     #   Same recipe as the Vodiwalker panel (runs on Railway): TWO XHTTP configs, each with its own fixed mode
     #     packet-up  = many short uploads + one download stream (passes every web edge, best on strict operators)
     #     stream-up  = one long upload + one download stream (fewer requests = higher speed)
-    #   ON by default (JINX_XHTTP=0 turns it off; its 2 names then move to HTTPUpgrade automatically).
-    XH = os.environ.get("JINX_XHTTP", "1") != "0"
+    #   ON by default (railwayaziz_XHTTP=0 turns it off; its 2 names then move to HTTPUpgrade automatically).
+    XH = os.environ.get("railwayaziz_XHTTP", "1") != "0"
     if XH and ver >= (24, 11, 0) and marzban_knows("xhttp"):
         extra.append(inbound("VLESS XHTTP", 2006, "xhttp", {"xhttpSettings": {"path": B + "/x", "mode": "packet-up"}}))
         extra.append(inbound("VLESS XHTTP SU", 2007, "xhttp", {"xhttpSettings": {"path": B + "/s", "mode": "stream-up"}}))
@@ -81,7 +81,7 @@ if os.environ.get("JINX_FAST", "1") != "0":
 #    Only when you turn on Settings > Networking > TCP Proxy for this service (Railway then sets these variables).
 REALITY_TAG = "VLESS REALITY"
 def reality_keys():
-    kf = "/var/lib/marzban/jinx_reality.json"
+    kf = "/var/lib/marzban/railwayaziz_reality.json"
     try:
         k = json.load(open(kf))
         if k.get("private") and k.get("sid"):
@@ -100,12 +100,12 @@ try:
     _rp = int(os.environ.get("RAILWAY_TCP_APPLICATION_PORT") or 0)
 except ValueError:
     _rp = 0
-if _rp and os.environ.get("JINX_REALITY", "1") != "0":
+if _rp and os.environ.get("railwayaziz_REALITY", "1") != "0":
     if _rp in (8080, 8000, 8090, 2001, 2002, 2003, 2004, 2005, 2006, 2007) or not 1024 <= _rp <= 65535:
         print(f"[lock] TCP Proxy port {_rp} is already used inside -> set the TCP Proxy port to 2010 (Reality skipped)", flush=True)
     elif ver >= (1, 8, 0) and marzban_knows("reality"):
         try:
-            k = reality_keys(); sni = (os.environ.get("JINX_REALITY_SNI") or "www.speedtest.net").strip()
+            k = reality_keys(); sni = (os.environ.get("railwayaziz_REALITY_SNI") or "www.speedtest.net").strip()
             extra.append({"tag": REALITY_TAG, "listen": "0.0.0.0", "port": _rp, "protocol": "vless",
                           "settings": {"clients": [], "decryption": "none"},
                           "streamSettings": {"network": "tcp", "security": "reality",
@@ -123,7 +123,7 @@ def bbr_ok():
     try:
         allowed = open("/proc/sys/net/ipv4/tcp_allowed_congestion_control").read().split()
         avail = open("/proc/sys/net/ipv4/tcp_available_congestion_control").read().split()
-        return "bbr" in allowed and "bbr" in avail and os.environ.get("JINX_BBR", "1") != "0"
+        return "bbr" in allowed and "bbr" in avail and os.environ.get("railwayaziz_BBR", "1") != "0"
     except Exception:
         return False
 BBR = bbr_ok()
@@ -138,8 +138,8 @@ print(f"[lock] BBR {'on' if BBR else 'not allowed by this server, normal TCP'}",
 
 # 💓 WS heartbeat: a tiny ping every 30 s keeps the phone's line open (operators cut idle lines),
 #    so the app never has to reconnect = no ping jump after a pause. Old Xray simply ignores it.
-_hb = os.environ.get("JINX_HEARTBEAT", "30").strip()
-HB = int(_hb) if _hb.isdigit() else 30          # JINX_HEARTBEAT=0 turns it off
+_hb = os.environ.get("railwayaziz_HEARTBEAT", "30").strip()
+HB = int(_hb) if _hb.isdigit() else 30          # railwayaziz_HEARTBEAT=0 turns it off
 for i in [locked] + base.get("inbounds", []) + extra:
     ss = i.get("streamSettings") or {}
     if ss.get("network") == "ws" and isinstance(ss.get("wsSettings"), dict):
@@ -169,14 +169,14 @@ def geosite_has(word):
             except Exception:
                 return False
     return False
-if os.environ.get("JINX_ADBLOCK", "1") != "0" and geosite_has("category-ads-all"):
+if os.environ.get("railwayaziz_ADBLOCK", "1") != "0" and geosite_has("category-ads-all"):
     rules = base.setdefault("routing", {}).setdefault("rules", [])
     rule = {"type": "field", "domain": ["geosite:category-ads-all"], "outboundTag": "BLOCK"}
     if rule not in rules:
         rules.insert(0, rule)
     print("[lock] ad blocker on (geosite:category-ads-all)", flush=True)
 else:
-    print("[lock] ad blocker off (no ads list in this image, or JINX_ADBLOCK=0)", flush=True)
+    print("[lock] ad blocker off (no ads list in this image, or railwayaziz_ADBLOCK=0)", flush=True)
 
 # order = order in the subscription: lightest / steadiest first (the locked inbound always stays first)
 _RANK = {locked["tag"]: 0, "VLESS REALITY": 1, "VLESS HTTPUPGRADE": 2, "VLESS XHTTP": 3, "VLESS XHTTP SU": 4, "VLESS WS": 5, "TROJAN WS": 6, "VMESS WS": 7}
@@ -202,9 +202,9 @@ def all_sockopts(cfg):
         if isinstance(so, dict):
             yield so
 
-# TCP Fast Open is OFF unless JINX_TFO=1: on Railway's network it can make new connections fail silently
-#   (the proven SuperJinX setup runs without it), and the WS keep-alive already removes most reconnects
-if os.environ.get("JINX_TFO", "0") != "1" or not tfo_ok():
+# TCP Fast Open is OFF unless railwayaziz_TFO=1: on Railway's network it can make new connections fail silently
+#   (the proven Superrailwayaziz setup runs without it), and the WS keep-alive already removes most reconnects
+if os.environ.get("railwayaziz_TFO", "0") != "1" or not tfo_ok():
     for so in all_sockopts(base):
         so.pop("tcpFastOpen", None)
     print("[lock] TCP Fast Open off", flush=True)
@@ -217,9 +217,9 @@ def xray_test(cfg):
     """(True, msg) = accepted or no way to test; (False, msg) = Xray refused it"""
     if not (os.path.isfile(XRAY_EXE) and os.access(XRAY_EXE, os.X_OK)):
         return True, "no xray binary to test with"
-    t = "/run/jinx/xray_test.json"
+    t = "/run/railwayaziz/xray_test.json"
     try:
-        os.makedirs("/run/jinx", exist_ok=True)
+        os.makedirs("/run/railwayaziz", exist_ok=True)
         json.dump(cfg, open(t, "w"), ensure_ascii=False)
         env = dict(os.environ)
         assets = os.environ.get("XRAY_ASSETS_PATH") or next((d for d in ("/usr/local/share/xray", "/usr/share/xray", "/usr/local/lib/xray")
