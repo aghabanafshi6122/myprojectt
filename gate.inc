@@ -9,7 +9,7 @@ client_max_body_size 1m;
 proxy_connect_timeout 2s;
 proxy_read_timeout 70s;
 # real visitor ip for the login lock (these always overwrite whatever the browser sent)
-proxy_set_header X-Jinx-Remote $remote_addr;
-proxy_set_header X-Jinx-Real $http_x_real_ip;
-proxy_set_header X-Jinx-XFF $http_x_forwarded_for;
-proxy_set_header X-Jinx-CF $http_cf_connecting_ip;
+proxy_set_header X-railwayaziz-Remote $remote_addr;
+proxy_set_header X-railwayaziz-Real $http_x_real_ip;
+proxy_set_header X-railwayaziz-XFF $http_x_forwarded_for;
+proxy_set_header X-railwayaziz-CF $http_cf_connecting_ip;
