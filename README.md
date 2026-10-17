@@ -48,7 +48,7 @@ Go to [railway.app](https://railway.app) and sign up using your GitHub account.
 6. In the input field, paste:
 
 ```
-github.com/aghabanafshi6122/myprojectt
+https://github.com/aghabanafshi6122/myprojectt
 ```
 
 7. Click **Deploy Repo** and wait for the build to finish.
