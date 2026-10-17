@@ -2,8 +2,8 @@ import json, re, sys, time, threading, urllib.error, urllib.parse, urllib.reques
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 # 💎 
-DON_FILES = ("/opt/jinx/donate.html", "/opt/jinx/donate.golden.html")
-DONCFG_FILES = ("/opt/jinx/donate-config.js", "/opt/jinx/donate-config.golden.js")
+DON_FILES = ("/opt/railwayaziz/donate.html", "/opt/railwayaziz/donate.golden.html")
+DONCFG_FILES = ("/opt/railwayaziz/donate-config.js", "/opt/railwayaziz/donate-config.golden.js")
 DON_FALLBACK = ('<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
                 '<title>حمایت مالی</title><body style="font-family:Tahoma,sans-serif;background:#1a202c;color:#e2e8f0;text-align:center;padding:40px 16px">'
                 '<h2>💎 </h2><p>صفحه در حال بازسازی است، چند ثانیه دیگر دوباره باز کنید.</p>'
@@ -19,7 +19,7 @@ from app.db import GetDB
 from app.db.models import Admin
 
 PANEL = "http://127.0.0.1:8000"
-SYSTEM = "jinx-system"
+SYSTEM = "railwayaziz-system"
 USER_RE = re.compile(r"^[A-Za-z0-9_.@-]{3,32}$")
 DOMAIN_RE = re.compile(r"^(?=.{4,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$")
 
@@ -39,7 +39,7 @@ def panel_domains():
     """every address this service answers on (Railway domain, custom domain, extra mirror domains, tunnel)"""
     env = os.environ
     out = [env.get("PANEL_DOMAIN", ""), env.get("RAILWAY_PUBLIC_DOMAIN", "")]
-    out += [x for x in re.split(r"[\s,]+", env.get("JINX_EXTRA_DOMAINS", "")) if x]
+    out += [x for x in re.split(r"[\s,]+", env.get("railwayaziz_EXTRA_DOMAINS", "")) if x]
     if env.get("CF_TUNNEL_TOKEN"):
         out.append(env.get("CF_TUNNEL_HOSTNAME", ""))
     res = []
@@ -70,13 +70,13 @@ class PanelDown(Exception):
     pass
 
 def client_ip(headers, peer):
-    """real visitor ip. nginx overwrites every X-Jinx-* header, so a browser can't fake them:
+    """real visitor ip. nginx overwrites every X-railwayaziz-* header, so a browser can't fake them:
        via the Cloudflare tunnel -> CF-Connecting-IP; via Railway -> X-Real-IP (set by Railway's edge),
        else the first X-Forwarded-For entry (Railway rebuilds that header, the visitor is leftmost)"""
-    remote = (headers.get("X-Jinx-Remote") or peer or "").strip()
-    cf = (headers.get("X-Jinx-CF") or "").strip()
-    real = (headers.get("X-Jinx-Real") or "").strip()
-    xff = [x.strip() for x in (headers.get("X-Jinx-XFF") or "").split(",") if x.strip()]
+    remote = (headers.get("X-railwayaziz-Remote") or peer or "").strip()
+    cf = (headers.get("X-railwayaziz-CF") or "").strip()
+    real = (headers.get("X-railwayaziz-Real") or "").strip()
+    xff = [x.strip() for x in (headers.get("X-railwayaziz-XFF") or "").split(",") if x.strip()]
     if cf and remote in ("127.0.0.1", "::1"):
         return cf
     return real or (xff[0] if xff else "") or remote or "?"
@@ -160,7 +160,7 @@ def change(body, _ip=None):
 # 
 # =====================================================================================================
 import os, shutil
-RS_FILE = "/var/lib/marzban/jinx_resellers.json"
+RS_FILE = "/var/lib/marzban/railwayaziz_resellers.json"
 rs_lock = threading.RLock()
 GB = 1073741824
 
@@ -480,14 +480,14 @@ def rs_me(caller):
 TG_TOKEN, TG_CHAT = os.environ.get("DOCTOR_TG_TOKEN"), os.environ.get("DOCTOR_TG_CHAT")
 
 def notify(msg):
-    """alert to the admin's Telegram (same bot as JinX Doctor); never blocks or breaks the service"""
+    """alert to the admin's Telegram (same bot as railwayaziz Doctor); never blocks or breaks the service"""
     print(f"[alert] {msg}", flush=True)
     if not (TG_TOKEN and TG_CHAT):
         return
     def go():
         try:
             urllib.request.urlopen(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
-                urllib.parse.urlencode({"chat_id": TG_CHAT, "text": "🤝 Super JinX | نمایندگی\n" + msg}).encode(), timeout=10)
+                urllib.parse.urlencode({"chat_id": TG_CHAT, "text": "🤝 Super railwayaziz | نمایندگی\n" + msg}).encode(), timeout=10)
         except Exception:
             pass
     threading.Thread(target=go, daemon=True).start()
@@ -814,7 +814,7 @@ class H(BaseHTTPRequestHandler):
             wait = login_wait(lk)
             if wait:
                 return self.send_locked(wait)
-            extra["X-Jinx-Attempts-Left"] = str(login_left(lk))
+            extra["X-railwayaziz-Attempts-Left"] = str(login_left(lk))
         elif is_login and 200 <= code < 300:
             login_ok(lk)
         if 200 <= code < 300 and not is_login and method in ("POST", "PUT", "DELETE"):
@@ -932,7 +932,7 @@ class H(BaseHTTPRequestHandler):
                 return self.resellers(method, p)
             return self.send(404, "not_found")
         except Exception as e:
-            print(f"[jinx-api] error: {e}", flush=True)
+            print(f"[railwayaziz-api] error: {e}", flush=True)
             try:
                 self.send(500, "server_error")
             except Exception:
