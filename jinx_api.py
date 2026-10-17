@@ -1,17 +1,17 @@
 import json, re, sys, time, threading, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-# 💎 donation page backup (used only if nginx can't read the file itself)
+# 💎 
 DON_FILES = ("/opt/jinx/donate.html", "/opt/jinx/donate.golden.html")
 DONCFG_FILES = ("/opt/jinx/donate-config.js", "/opt/jinx/donate-config.golden.js")
 DON_FALLBACK = ('<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
                 '<title>حمایت مالی</title><body style="font-family:Tahoma,sans-serif;background:#1a202c;color:#e2e8f0;text-align:center;padding:40px 16px">'
-                '<h2>💎 حمایت مالی</h2><p>صفحه در حال بازسازی است، چند ثانیه دیگر دوباره باز کنید.</p>'
+                '<h2>💎 </h2><p>صفحه در حال بازسازی است، چند ثانیه دیگر دوباره باز کنید.</p>'
                 '<p><a style="color:#9f7aea" href="/donate/">دوباره</a> · <a style="color:#9f7aea" href="/dashboard/">بازگشت به پنل</a></p></body></html>').encode()
 sys.path.insert(0, "/code")
 
 try:
-    import io, segno  # QR codes for the subscription page
+    import io, segno  # QR
 except Exception:
     segno = None
 from passlib.context import CryptContext
@@ -157,14 +157,7 @@ def change(body, _ip=None):
 
 
 # =====================================================================================================
-# 🤝 Reseller panels (پنل‌های نمایندگی)
-# A reseller is a normal (non-sudo) Marzban admin: same panel, same login page, sees ONLY its own users.
-# Limits are enforced here, in front of the panel API (nginx sends the few write calls through us):
-#   max_users  - how many users it may have            (0 = unlimited)
-#   quota      - total data it may sell, in bytes       (0 = unlimited)
-#                charge = sum(max(limit, used)) of its users + traffic of deleted/reset users ("burned")
-#   expire     - unix time the reseller panel stops     (0 = never)
-#   enabled    - off = cannot log in, sessions are closed at once
+# 
 # =====================================================================================================
 import os, shutil
 RS_FILE = "/var/lib/marzban/jinx_resellers.json"
