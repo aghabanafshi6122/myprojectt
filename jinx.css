@@ -1,10 +1,10 @@
-/* ⚡ Super JinX skin for the Marzban dashboard
+/* ⚡ Super railwayaziz skin for the Marzban dashboard
    Safe by design: only polishes spacing, sizes, fonts and RTL. Never hides or moves panel features. */
 
 /* ---------- font (bundled in the image, works even if Google Fonts is blocked) ---------- */
-@font-face { font-family: "Vazirmatn"; src: url("/jinx-fonts/Vazirmatn-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Vazirmatn"; src: url("/jinx-fonts/Vazirmatn-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "Vazirmatn"; src: url("/jinx-fonts/Vazirmatn-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Vazirmatn"; src: url("/railwayaziz-fonts/Vazirmatn-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Vazirmatn"; src: url("/railwayaziz-fonts/Vazirmatn-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Vazirmatn"; src: url("/railwayaziz-fonts/Vazirmatn-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
 :root {
   --chakra-fonts-body: "Vazirmatn", Tahoma, -apple-system, "Segoe UI", Roboto, sans-serif;
   --chakra-fonts-heading: "Vazirmatn", Tahoma, -apple-system, "Segoe UI", Roboto, sans-serif;
