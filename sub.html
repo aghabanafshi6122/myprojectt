@@ -8,11 +8,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#050507">
 <meta name="color-scheme" content="dark light">
-<title>Super JinX</title>
+<title>Super railwayaziz</title>
 <style>
-@font-face{font-family:"Vazirmatn";src:url("/jinx-fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Vazirmatn";src:url("/jinx-fonts/Vazirmatn-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Vazirmatn";src:url("/jinx-fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Vazirmatn";src:url("/railwayaziz-fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Vazirmatn";src:url("/railwayaziz-fonts/Vazirmatn-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Vazirmatn";src:url("/railwayaziz-fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 :root{--a:#8b7cf6;--a2:#c4b5fd;--c:#5eead4;--gold:#e9c987;--gold2:#b8925a;--tg:#2aabee;--ok:#34d399;--warn:#fbbf24;--bad:#fb7185;--info:#60a5fa;--off:#94a3b8;--e:cubic-bezier(.22,.9,.24,1);--sp:cubic-bezier(.34,1.56,.64,1)}
 [data-theme=dark]{--bg:#050507;--dev:#0a0a10;--s1:rgba(255,255,255,.03);--s2:rgba(255,255,255,.05);--s3:rgba(255,255,255,.085);--line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.13);--t1:#f6f4ee;--t2:#a9a7b6;--t3:#6d6b7d;--glow:1}
 [data-theme=light]{--bg:#efece4;--dev:#fbfaf6;--s1:rgba(30,24,10,.03);--s2:rgba(30,24,10,.05);--s3:rgba(30,24,10,.08);--line:rgba(30,24,10,.08);--line2:rgba(30,24,10,.15);--t1:#16140f;--t2:#5d5a52;--t3:#8f8b80;--glow:.45;--gold:#a57a33;--gold2:#7d5a22}
@@ -337,10 +337,10 @@ html.jx-sw *,html.jx-sw *::before,html.jx-sw *::after{transition:none!important}
 </head>
 <body>
 <div class="amb" aria-hidden="true"><span class="neb"></span><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i><span class="floor"></span><span class="dust"></span><span class="gr"></span></div>
-<div class="intro" id="jx-intro" aria-hidden="true"><svg class="ig" viewBox="0 0 64 64" fill="none"><path class="sg-hex" d="M32 3 57 17.5v29L32 61 7 46.5v-29Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path class="sg-j" d="M38 16v20.5a8.5 8.5 0 0 1-17 0" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path class="sg-bolt" d="M33 24 27 33h6l-3 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><p>SUPER JINX</p></div>
+<div class="intro" id="jx-intro" aria-hidden="true"><svg class="ig" viewBox="0 0 64 64" fill="none"><path class="sg-hex" d="M32 3 57 17.5v29L32 61 7 46.5v-29Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path class="sg-j" d="M38 16v20.5a8.5 8.5 0 0 1-17 0" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path class="sg-bolt" d="M33 24 27 33h6l-3 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><p>SUPER railwayaziz</p></div>
 <script>try{if(sessionStorage.getItem("jx-seen"))document.documentElement.classList.add("seen");sessionStorage.setItem("jx-seen","1")}catch(e){}</script>
 <script>try{localStorage.removeItem("jx-view")}catch(e){}</script>
-<script id="jinx-data" type="application/json">{"username": {{ user.username|tojson }}, "status": {{ user.status|string|tojson }}, "used": {{ (user.used_traffic or 0)|tojson }}, "limit": {{ (user.data_limit or 0)|tojson }}, "expire": {{ (user.expire or 0)|tojson }}, "reset": {{ (user.data_limit_reset_strategy|string)|tojson }}, "online": {{ ((user.online_at|string) if user.online_at else "")|tojson }}, "hold": {{ (user.on_hold_expire_duration or 0)|tojson }}, "links": {{ (user.links or [])|tojson }}, "sub": {{ (user.subscription_url or "")|tojson }}}</script>
+<script id="railwayaziz-data" type="application/json">{"username": {{ user.username|tojson }}, "status": {{ user.status|string|tojson }}, "used": {{ (user.used_traffic or 0)|tojson }}, "limit": {{ (user.data_limit or 0)|tojson }}, "expire": {{ (user.expire or 0)|tojson }}, "reset": {{ (user.data_limit_reset_strategy|string)|tojson }}, "online": {{ ((user.online_at|string) if user.online_at else "")|tojson }}, "hold": {{ (user.on_hold_expire_duration or 0)|tojson }}, "links": {{ (user.links or [])|tojson }}, "sub": {{ (user.subscription_url or "")|tojson }}}</script>
 <div class="device"><main class="stack" id="app"></main></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"><div class="sbox"><h3 id="sh-t"></h3><div id="sh-q"></div><button type="button" class="b full" id="sh-x"></button></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -349,7 +349,7 @@ html.jx-sw *,html.jx-sw *::before,html.jx-sw *::after{transition:none!important}
 /* ===================================================================================
    Pure functions (no DOM): model, texts, icons, HTML. Latin digits only, all escaped.
    =================================================================================== */
-function JinxTextBase(fa) {
+function railwayazizTextBase(fa) {
   return fa ? {
     brandSub: "اشتراک اختصاصی", member: "عضو", remaining: "حجم باقی‌مانده", unlimited: "نامحدود", until: "اعتبار تا", noexp: "بدون انقضا",
     usage: "مصرف", data: "حجم", time: "زمان باقی‌مانده", used: "مصرف شده", left: "باقی‌مانده", days: "روز", hours: "ساعت", ended: "به پایان رسیده",
@@ -390,7 +390,7 @@ function JinxTextBase(fa) {
     demo: "Preview with sample data — real data is shown on the server"
   };
 }
-var JINX_P = {
+var railwayaziz_P = {
   logo: "m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z",
   chart: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z",
   link: "M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244",
@@ -410,16 +410,16 @@ var JINX_P = {
   sun: "M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z",
   moon: "M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
 };
-JINX_P.spark = "M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z";
-JINX_P.shield = "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z";
-function JinxIcon(n) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="' + (JINX_P[n] || "") + '"/></svg>'; }
-function JinxLat(s) { return String(s).replace(/[۰-۹]/g, function (d) { return "۰۱۲۳۴۵۶۷۸۹".indexOf(d); }).replace(/[٠-٩]/g, function (d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); }); }
-function JinxEsc(s) { return JinxLat(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+railwayaziz_P.spark = "M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z";
+railwayaziz_P.shield = "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z";
+function railwayazizIcon(n) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="' + (railwayaziz_P[n] || "") + '"/></svg>'; }
+function railwayazizLat(s) { return String(s).replace(/[۰-۹]/g, function (d) { return "۰۱۲۳۴۵۶۷۸۹".indexOf(d); }).replace(/[٠-٩]/g, function (d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); }); }
+function railwayazizEsc(s) { return railwayazizLat(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
 /* model: every exact value the page and the buttons use */
-function JinxModel(D, o) {
+function railwayazizModel(D, o) {
   D = D && typeof D === "object" ? D : {};
-  var fa = o.lang === "fa", T = JinxText(fa), cfg = o.cfg || {}, GB = 1073741824;
+  var fa = o.lang === "fa", T = railwayazizText(fa), cfg = o.cfg || {}, GB = 1073741824;
   var key = function (s) { return String(s == null ? "" : s).split(".").pop().toLowerCase(); };
   function size(b) {
     b = Number(b); if (!isFinite(b) || b < 0) b = 0;
@@ -434,7 +434,7 @@ function JinxModel(D, o) {
   function date(ts, withTime) {
     var d = new Date(ts); if (isNaN(d.getTime())) return "";
     var op = { year: "numeric", month: "long", day: "numeric" }; if (withTime) { op.hour = "2-digit"; op.minute = "2-digit"; }
-    try { return JinxLat(d.toLocaleString(fa ? "fa-IR-u-nu-latn" : "en-GB", op)); } catch (e) { return d.toISOString().slice(0, 16).replace("T", " "); }
+    try { return railwayazizLat(d.toLocaleString(fa ? "fa-IR-u-nu-latn" : "en-GB", op)); } catch (e) { return d.toISOString().slice(0, 16).replace("T", " "); }
   }
   function remark(link) {
     try {
@@ -511,7 +511,7 @@ function JinxModel(D, o) {
     for (i = 0; i < m.routes.length; i++) if (m.routes[i] === "direct" && m.nets[i] === "HU") return i;
     for (i = 0; i < m.routes.length; i++) if (m.routes[i] === "direct") return i;
     return m.links.length ? 0 : -1; })();
-  var NAME = cfg.brand || "Super JinX", E = encodeURIComponent, b64 = "";
+  var NAME = cfg.brand || "Super railwayaziz", E = encodeURIComponent, b64 = "";
   try { b64 = btoa(m.sub); } catch (x) {}
   m.name = NAME;
   m.apps = {
@@ -548,8 +548,8 @@ function jxOp(k) { for (var i = 0; i < JX_OPS.length; i++) if (JX_OPS[i].k === k
 function jxRank(op, remark) { var o = jxOp(op); if (!o.c) return -1; var n = cfgName(remark);
   for (var i = 0; i < o.c.length; i++) if (n.indexOf(o.c[i]) >= 0) return i; return -1; }
 /* config list: panel order for "all"; for an operator its recommended configs come first (in that order) */
-function JinxCfgList(m, op) {
-  var E = JinxEsc, I = JinxIcon, T = m.T, h = "", o = jxOp(op), idx = m.links.map(function (_, i) { return i; }), top = -1;
+function railwayazizCfgList(m, op) {
+  var E = railwayazizEsc, I = railwayazizIcon, T = m.T, h = "", o = jxOp(op), idx = m.links.map(function (_, i) { return i; }), top = -1;
   if (o.c) { var r = idx.map(function (i) { return jxRank(op, m.remarks[i]); });
     idx.sort(function (a, b) { var x = r[a] < 0 ? 999 : r[a], y = r[b] < 0 ? 999 : r[b]; return x - y || a - b; });
     if (idx.length && r[idx[0]] >= 0) top = idx[0]; }
@@ -559,15 +559,15 @@ function JinxCfgList(m, op) {
     var fit = !!o.c && jxRank(op, m.remarks[i]) >= 0;
     h += '<div class="row cfg' + (fit ? " fit" : "") + '"><span class="idx ltr">' + (n < 9 ? "0" : "") + (n + 1) + '</span><span class="grow"><b title="' + E(m.remarks[i]) + '">' + E(cfgName(m.remarks[i])) + '</b><small><span class="pr pr-' + E(m.protos[i].slice(0, 6) || "cfg") + ' ltr">' + E(m.protos[i].slice(0, 6) || "cfg") + (m.nets[i] ? " · " + E(m.nets[i]) : "") + '</span><span class="rtb rt-' + E(m.routes[i]) + '">' + E(T.rt[m.routes[i]] || T.rt.other) + '</span>' +
          (m.routes[i] === "direct" || m.routes[i] === "frag" ? '<span class="pgc ltr" data-pg="1">…</span>' : '') +
-         (i === pick ? '<span class="pick">' + E(o.c ? (m.fa ? "⭐ اول این رو بزن" : "⭐ Try first") : (m.fa ? "⭐ پیشنهاد جینکس" : "⭐ JinX pick")) + '</span>' :
+         (i === pick ? '<span class="pick">' + E(o.c ? (m.fa ? "⭐ اول این رو بزن" : "⭐ Try first") : (m.fa ? "⭐ پیشنهاد جینکس" : "⭐ railwayaziz pick")) + '</span>' :
           fit ? '<span class="fitb">' + E(m.fa ? "مناسب " + o.fa : "Good on " + o.en) + '</span>' : '') + '</small></span><span class="acts">' +
          '<button type="button" class="b ic" data-a="qr-cfg" data-i="' + i + '" aria-label="QR">' + I("qr") + '</button>' +
          '<button type="button" class="b ic pri" data-a="copy-cfg" data-i="' + i + '" aria-label="' + E(T.copy) + '">' + I("copy") + '</button></span></div>';
   });
   return h;
 }
-function JinxOps(m, op) {
-  var E = JinxEsc, h = '<div class="ops" role="radiogroup" aria-label="' + E(m.fa ? "اپراتور شما" : "Your operator") + '"><span class="opl">' + E(m.fa ? "اپراتورت:" : "Operator:") + '</span>';
+function railwayazizOps(m, op) {
+  var E = railwayazizEsc, h = '<div class="ops" role="radiogroup" aria-label="' + E(m.fa ? "اپراتور شما" : "Your operator") + '"><span class="opl">' + E(m.fa ? "اپراتورت:" : "Operator:") + '</span>';
   JX_OPS.forEach(function (o) { h += '<button type="button" role="radio" aria-checked="' + (o.k === op) + '" class="' + (o.k === op ? "on" : "") + '" data-a="op" data-v="' + o.k + '">' + E(m.fa ? o.fa : o.en) + '</button>'; });
   return h + '</div>';
 }
@@ -575,44 +575,44 @@ function JinxOps(m, op) {
 /* config name on the card: "brand ✦ 🚀 Turbo Iran · VLESS" -> "🚀 Turbo Iran" (protocol + route are shown as badges) */
 function cfgName(r) { r = String(r || ""); var p = r.split(" \u2726 "); if (p.length < 2) return r; var n = p.slice(1).join(" \u2726 "), k = n.lastIndexOf(" \u00b7 "); n = (k > 0 ? n.slice(0, k) : n).trim(); return n || p[0]; }
 /* ---------- v7 texts on top of the base texts ---------- */
-function JinxText(fa) {
-  var b = JinxTextBase(fa), x = fa ? {
-    pass: "JINX PASS", access: "دسترسی اختصاصی", holder: "صاحب اشتراک", serial: "شماره‌ی پاس", left2: "باقی‌مانده", exp2: "انقضا", cd: "زمان",
+function railwayazizText(fa) {
+  var b = railwayazizTextBase(fa), x = fa ? {
+    pass: "railwayaziz PASS", access: "دسترسی اختصاصی", holder: "صاحب اشتراک", serial: "شماره‌ی پاس", left2: "باقی‌مانده", exp2: "انقضا", cd: "زمان",
     reactor: "هسته‌ی مصرف", dataRing: "حجم", timeRing: "زمان", ofTotal: "از", telemetry: "وضعیت زنده",
     portal: "عضویت در کانال", portalD: "سرورهای جدید، اطلاعیه‌ها و پشتیبانی", portalGo: "ورود به کانال",
-    dPass: "پاس", dCfg: "کانفیگ", dApps: "برنامه", dCare: "پشتیبان", care: "JinX Care", careSub: "ربات پشتیبان خودکار",
+    dPass: "پاس", dCfg: "کانفیگ", dApps: "برنامه", dCare: "پشتیبان", care: "railwayaziz Care", careSub: "ربات پشتیبان خودکار",
     sig: "طراحی و ساخت اختصاصی", tapCopy: "برای کپی بزن", freq: "فرکانس‌ها",
     rt: { relay: "رله ایران", cdn: "CDN", direct: "مستقیم", frag: "فرگمنت", reality: "ریالیتی", other: "کانفیگ" }
   } : {
-    pass: "JINX PASS", access: "Private access", holder: "Pass holder", serial: "Pass no.", left2: "Remaining", exp2: "Expires", cd: "Time",
+    pass: "railwayaziz PASS", access: "Private access", holder: "Pass holder", serial: "Pass no.", left2: "Remaining", exp2: "Expires", cd: "Time",
     reactor: "Usage core", dataRing: "Data", timeRing: "Time", ofTotal: "of", telemetry: "Live status",
     portal: "Join our channel", portalD: "New servers, announcements and support", portalGo: "Open channel",
-    dPass: "Pass", dCfg: "Configs", dApps: "Apps", dCare: "Care", care: "JinX Care", careSub: "Automatic support bot",
+    dPass: "Pass", dCfg: "Configs", dApps: "Apps", dCare: "Care", care: "railwayaziz Care", careSub: "Automatic support bot",
     sig: "Crafted exclusively", tapCopy: "Tap to copy", freq: "Frequencies",
     rt: { relay: "Iran relay", cdn: "CDN", direct: "Direct", frag: "Fragment", reality: "Reality", other: "Config" }
   };
   for (var k in x) b[k] = x[k];
   return b;
 }
-JINX_P.home = "m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25";
-JINX_P.signal = "M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z";
+railwayaziz_P.home = "m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25";
+railwayaziz_P.signal = "M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z";
 
 /* unique-looking but stable pass number from the username */
-function JinxSerial(s) {
-  s = String(s || "jinx"); var h1 = 0x811c9dc5, h2 = 0x1505;
+function railwayazizSerial(s) {
+  s = String(s || "railwayaziz"); var h1 = 0x811c9dc5, h2 = 0x1505;
   for (var i = 0; i < s.length; i++) { var c = s.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619) >>> 0; h2 = ((h2 << 5) + h2 + c) >>> 0; }
   var x = ("00000000" + h1.toString(16)).slice(-8).toUpperCase(), y = ("00000000" + h2.toString(16)).slice(-4).toUpperCase();
   return "JX-" + x.slice(0, 4) + "-" + x.slice(4) + "-" + y;
 }
-/* the JinX sigil: J + lightning inside a hex, drawn with strokes */
-function JinxSigil(cls) {
+/* the railwayaziz sigil: J + lightning inside a hex, drawn with strokes */
+function railwayazizSigil(cls) {
   return '<svg class="' + cls + '" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path class="sg-hex" d="M32 3 57 17.5v29L32 61 7 46.5v-29Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>' +
          '<path class="sg-j" d="M38 16v20.5a8.5 8.5 0 0 1-17 0" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>' +
          '<path class="sg-bolt" d="M33 24 27 33h6l-3 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 }
 
-function JinxApps(m, tab, fa) {
-  var T = m.T, E = JinxEsc, I = JinxIcon, h = "";
+function railwayazizApps(m, tab, fa) {
+  var T = m.T, E = railwayazizEsc, I = railwayazizIcon, h = "";
   if (!m.apps[tab]) tab = m.plats[0];
   m.apps[tab].forEach(function (a) {
     h += '<div class="row app"><span class="glyph ltr">' + E(a.n.charAt(0)) + '</span><span class="grow"><b><span class="ltr">' + E(a.n) + '</span></b><small>' + E(T.tabs[tab]) +
@@ -623,8 +623,8 @@ function JinxApps(m, tab, fa) {
   return h;
 }
 
-function JinxRender(D, o) {
-  var m = JinxModel(D, o), T = m.T, cfg = m.cfg, E = JinxEsc, I = JinxIcon;
+function railwayazizRender(D, o) {
+  var m = railwayazizModel(D, o), T = m.T, cfg = m.cfg, E = railwayazizEsc, I = railwayazizIcon;
   var tab = m.plats.indexOf(o.tab) >= 0 ? o.tab : m.plats[0];
   var A = o.animate ? " rise" : "", dl = 0;
   var rise = function () { if (!o.animate) return ""; dl += 0.06; return ' style="animation-delay:' + dl.toFixed(2) + 's"'; };
@@ -636,7 +636,7 @@ function JinxRender(D, o) {
   if (o.demo) h += '<div class="demo' + A + '">' + E(T.demo) + '</div>';
 
   /* top bar */
-  h += '<header class="top' + A + '"' + rise() + '><div class="brand">' + JinxSigil("mark") +
+  h += '<header class="top' + A + '"' + rise() + '><div class="brand">' + railwayazizSigil("mark") +
        '<span><b class="word ltr">' + E(m.name) + '</b><small>' + E(T.access) + '</small></span></div>' +
        '<nav class="dnav" aria-label="Sections">' + [["s-pass", "home", T.dPass], ["s-cfg", "signal", T.dCfg], ["s-apps", "device", T.dApps], ["s-care", "shield", T.dCare]].map(function (x, k) {
          return '<a href="#' + x[0] + '" data-a="nav" data-v="' + x[0] + '"' + (k ? "" : ' class="on"') + '>' + I(x[1]) + '<span>' + E(x[2]) + '</span></a>'; }).join("") + '</nav>' +
@@ -646,10 +646,10 @@ function JinxRender(D, o) {
   h += '<div class="cols"><div class="col cl">';
   /* the pass */
   h += '<section class="pass-wrap' + A + '" id="s-pass"' + rise() + '><div class="pass st-' + m.status + '" id="jx-pass">' +
-       '<span class="foil" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span>' + JinxSigil("wm") +
+       '<span class="foil" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span>' + railwayazizSigil("wm") +
        '<div class="p-top"><span class="p-lbl ltr">' + E(T.pass) + '</span><span class="chip s-' + m.status + '"><i></i>' + E(T.st[m.status]) + '</span></div>' +
        '<div class="p-mid"><small>' + E(T.holder) + '</small><div class="uname ltr">' + E(D && D.username || "-") + '</div>' +
-       '<div class="serial ltr"><span>' + E(JinxSerial(D && D.username)) + '</span></div></div>' +
+       '<div class="serial ltr"><span>' + E(railwayazizSerial(D && D.username)) + '</span></div></div>' +
        '<div class="perf" aria-hidden="true"></div>' +
        '<div class="stub"><div><small>' + E(T.left2) + '</small><b class="ltr">' + (big ? '<span data-count="' + E(big.v) + '">' + E(big.v) + '</span><em>' + E(big.u) + '</em>' : "∞") + '</b></div>' +
        '<div><small>' + E(T.exp2) + '</small><b class="sm">' + E(m.hasTime ? m.untilTxt : T.noexp) + '</b></div>' +
@@ -699,8 +699,8 @@ function JinxRender(D, o) {
        '<button type="button" class="b sm" data-a="reload">' + I("sync") + '<span>' + E(T.refresh) + '</span></button></div></section>';
 
   /* configs (panel order, one per row) */
-  h += '<section class="panel' + A + '" id="s-cfg"' + rise() + '><div class="ph"><h2>' + I("signal") + E(T.cfgs) + '</h2><span class="aux ltr">' + m.links.length + '</span></div>' + (m.links.length > 1 ? JinxOps(m, o.op) : '') + '<div class="list" id="jx-cfgs">';
-  h += JinxCfgList(m, o.op);
+  h += '<section class="panel' + A + '" id="s-cfg"' + rise() + '><div class="ph"><h2>' + I("signal") + E(T.cfgs) + '</h2><span class="aux ltr">' + m.links.length + '</span></div>' + (m.links.length > 1 ? railwayazizOps(m, o.op) : '') + '<div class="list" id="jx-cfgs">';
+  h += railwayazizCfgList(m, o.op);
   h += '</div>';
   if (m.links.length) h += '<div class="ptip">' + I("signal") + '<span class="grow"><b>' + E(m.fa ? "پینگ دقیق‌تر در v2rayNG" : "More accurate ping in v2rayNG") + '</b><small>' +
        E(m.fa ? "تنظیمات ← آدرس تست تأخیر واقعی ← این آدرس را بگذار (یک رفت‌وبرگشت کمتر، عدد واقعی‌تر)" : "Settings → real delay test URL → use this address (one round trip less, a truer number)") +
@@ -714,19 +714,19 @@ function JinxRender(D, o) {
   h += '<section class="panel' + A + '" id="s-apps"' + rise() + '><div class="ph"><h2>' + I("device") + E(T.apps) + '</h2></div>' +
        '<div class="seg" role="tablist" style="--n:' + m.plats.length + ';--k:' + m.plats.indexOf(tab) + '"><span class="ind" aria-hidden="true"></span>';
   m.plats.forEach(function (p) { h += '<button type="button" role="tab" aria-selected="' + (p === tab) + '" class="' + (p === tab ? "on" : "") + '" data-a="tab" data-v="' + E(p) + '">' + E(T.tabs[p]) + '</button>'; });
-  h += '</div><div class="list" id="jx-apps">' + JinxApps(m, tab, m.fa) + '</div></section>';
+  h += '</div><div class="list" id="jx-apps">' + railwayazizApps(m, tab, m.fa) + '</div></section>';
 
   /* care bot */
   h += '<section class="panel care' + A + '" id="s-care"' + rise() + '><div class="ph"><h2>' + I("shield") + '<span class="ltr">' + E(T.care) + '</span></h2><span class="aux ltr" id="jx-bot-t">24/7</span></div>' +
        '<div class="bot"><span class="bav run" id="jx-bav">' + I("spark") + '</span><span class="grow"><b id="jx-bot-s">' + E(T.botIdle) + '</b><small>' + E(T.botD) + '</small></span></div>' +
-       '<div class="term ltr" id="jx-term" aria-live="polite"><p><i>›</i> jinx-care boot</p></div>' +
+       '<div class="term ltr" id="jx-term" aria-live="polite"><p><i>›</i> railwayaziz-care boot</p></div>' +
        '<button type="button" class="b pri full" data-a="diag">' + I("shield") + '<span>' + E(T.botRun) + '</span></button>' +
        '<div class="steps">';
   T.g.forEach(function (s, i) { h += '<div class="step"><b class="ltr">' + (i + 1) + '</b><p>' + E(s) + '</p></div>'; });
   h += '</div></section>';
 
   h += '</div></div>';
-  h += '<footer class="foot">' + JinxSigil("fs") + '<span class="ltr">' + E(m.name) + '</span><small>' + E(T.sig) + '</small></footer>';
+  h += '<footer class="foot">' + railwayazizSigil("fs") + '<span class="ltr">' + E(m.name) + '</span><small>' + E(T.sig) + '</small></footer>';
 
   /* dock */
   h += '<nav class="dock" aria-label="Sections">' +
@@ -738,14 +738,14 @@ function JinxRender(D, o) {
 }
 
 /* =====================================================================================
-   Super JinX · premium subscription page  (v7 · JinX Pass · self-healing)
-   Edit JINX_CONFIG to change brand / channel / platforms later.
+   Super railwayaziz · premium subscription page  (v7 · railwayaziz Pass · self-healing)
+   Edit railwayaziz_CONFIG to change brand / channel / platforms later.
    ===================================================================================== */
-var JINX_CONFIG = {
-  brand: "Super JinX",
+var railwayaziz_CONFIG = {
+  brand: "Super railwayaziz",
   brandFa: "جینکس",
-  channel: "https://t.me/Super_Jinx",
-  channelHandle: "@Super_Jinx",
+  channel: "https://t.me/Super_railwayaziz",
+  channelHandle: "@Super_railwayaziz",
   updateHours: 6,                        /* keep equal to SUB_UPDATE_INTERVAL in start.sh */
   platforms: ["android", "ios", "windows"]
 };
@@ -758,18 +758,18 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
   var root = document.documentElement;
 
   /* ---------- data ---------- */
-  var raw = $("jinx-data").textContent, D = null, DEMO = false;
+  var raw = $("railwayaziz-data").textContent, D = null, DEMO = false;
   try { D = JSON.parse(raw); } catch (e) { D = null; }
   if (!D || typeof D !== "object" || raw.indexOf("{" + "{") >= 0) {
     DEMO = true;
     var t0 = Math.floor(Date.now() / 1000);
-    D = { username: "ali_jinx", status: "active", used: 14.62 * 1073741824, limit: 50 * 1073741824, expire: t0 + 23 * 86400 + 5 * 3600 + 17 * 60,
+    D = { username: "ali_railwayaziz", status: "active", used: 14.62 * 1073741824, limit: 50 * 1073741824, expire: t0 + 23 * 86400 + 5 * 3600 + 17 * 60,
       reset: "month", online: new Date(Date.now() - 40000).toISOString(), hold: 0, sub: "/sub/demo",
-      links: ["vless://demo@5.6.7.8:443?type=ws&security=tls&sni=" + location.hostname + "#" + encodeURIComponent("جینکس | 𝗝𝗶𝗻𝗫 ✦ 🚀 Turbo Iran · JinX Core"),
-        "vless://demo@104.16.1.1:443?type=ws&security=tls&sni=cf.example.com#" + encodeURIComponent("جینکس | 𝗝𝗶𝗻𝗫 ✦ 🌩 Cloud Storm 443 · XHTTP"),
-        "vless://demo@" + (location.hostname || "panel.example.com") + ":443?type=ws&security=tls#" + encodeURIComponent("جینکس | 𝗝𝗶𝗻𝗫 ✦ 🇳🇱 Amsterdam Rocket · JinX Core"),
-        "vless://demo@" + (location.hostname || "panel.example.com") + ":443?type=ws&security=tls&fragment=10-20%2C10-20%2Ctlshello#" + encodeURIComponent("جینکس | 𝗝𝗶𝗻𝗫 ✦ 👻 Ghost Anti-Filter · JinX Core"),
-        "trojan://demo@" + (location.hostname || "panel.example.com") + ":443?type=ws&security=tls#" + encodeURIComponent("جینکس | 𝗝𝗶𝗻𝗫 ✦ 🔱 Trident · Trojan")] };
+      links: ["vless://demo@5.6.7.8:443?type=ws&security=tls&sni=" + location.hostname + "#" + encodeURIComponent("جینکس | railwayaziz� ✦ 🚀 Turbo Iran · railwayaziz Core"),
+        "vless://demo@104.16.1.1:443?type=ws&security=tls&sni=cf.example.com#" + encodeURIComponent("جینکس | railwayaziz� ✦ 🌩 Cloud Storm 443 · XHTTP"),
+        "vless://demo@" + (location.hostname || "panel.example.com") + ":443?type=ws&security=tls#" + encodeURIComponent("جینکس | railwayaziz� ✦ 🇳🇱 Amsterdam Rocket · railwayaziz Core"),
+        "vless://demo@" + (location.hostname || "panel.example.com") + ":443?type=ws&security=tls&fragment=10-20%2C10-20%2Ctlshello#" + encodeURIComponent("جینکس | railwayaziz� ✦ 👻 Ghost Anti-Filter · railwayaziz Core"),
+        "trojan://demo@" + (location.hostname || "panel.example.com") + ":443?type=ws&security=tls#" + encodeURIComponent("جینکس | railwayaziz� ✦ 🔱 Trident · Trojan")] };
   }
   var S = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   var ua = navigator.userAgent || "";
@@ -780,11 +780,11 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
     ping: null, pings: [], loadedAt: Date.now(),
     op: jxOp(S.get("jx-op")).k
   };
-  if (JINX_CONFIG.platforms.indexOf(st.tab) < 0) st.tab = JINX_CONFIG.platforms[0] || "android";
+  if (railwayaziz_CONFIG.platforms.indexOf(st.tab) < 0) st.tab = railwayaziz_CONFIG.platforms[0] || "android";
   var M = null;   /* current model (exact values used by every button) */
   function opts(animate) {
     return { now: Date.now(), loadedAt: st.loadedAt, origin: location.origin, here: location.href.split("#")[0].split("?")[0],
-      lang: st.lang, theme: st.theme, tab: st.tab, op: st.op, demo: DEMO, cfg: JINX_CONFIG, ping: st.ping, animate: animate };
+      lang: st.lang, theme: st.theme, tab: st.tab, op: st.op, demo: DEMO, cfg: railwayaziz_CONFIG, ping: st.ping, animate: animate };
   }
   var fa = function () { return st.lang === "fa"; };
   var tr = function (f, e) { return fa() ? f : e; };
@@ -796,8 +796,8 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
     applyTheme();
     var y = window.scrollY || 0;
     var o = opts(animate);
-    M = JinxModel(D, o);
-    $("app").innerHTML = JinxRender(D, o);
+    M = railwayazizModel(D, o);
+    $("app").innerHTML = railwayazizRender(D, o);
     $("sh-x").textContent = tr("بستن", "Close");
     var fill = function () {
       var rs = document.querySelectorAll("[data-off]"); for (var i = 0; i < rs.length; i++) rs[i].style.strokeDashoffset = rs[i].getAttribute("data-off");
@@ -881,7 +881,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
   function applyTheme() {
     root.setAttribute("data-theme", st.theme);
     var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute("content", st.theme === "light" ? "#efece4" : "#050507");
-    var tb = document.querySelector('[data-a="theme"]'); if (tb) tb.innerHTML = JinxIcon(st.theme === "light" ? "moon" : "sun");
+    var tb = document.querySelector('[data-a="theme"]'); if (tb) tb.innerHTML = railwayazizIcon(st.theme === "light" ? "moon" : "sun");
   }
 
   /* ---------- live parts (patched in place: no flicker, no scroll jump) ---------- */
@@ -923,7 +923,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
     if (DEMO) { st.ping = 74; st.pings = [82, 77, 79, 74, 76, 73, 75, 74]; setPing(); drawSpark(); if (cb) cb(); return; }
     var best = Infinity, n = 0;
     var once = function () {
-      probe("/jinx-api/health", 4000).then(function (r) {
+      probe("/railwayaziz-api/health", 4000).then(function (r) {
         if (r.ok) { lastHealth = r; if (r.ms < best) best = r.ms; st.pings.push(Math.max(1, Math.round(r.ms))); if (st.pings.length > 24) st.pings.shift(); drawSpark(); }
         if (++n < 3) { setTimeout(once, 200); return; }
         st.ping = isFinite(best) ? Math.max(1, Math.round(best)) : -1; setPing();
@@ -1020,7 +1020,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
   function download() {
     var list = M.links;
     if (!list.length) { toast(tr("کانفیگی وجود ندارد", "No configs"), true); return; }
-    var name = (JINX_CONFIG.brand + "-" + (D.username || "configs")).replace(/[^A-Za-z0-9_.-]+/g, "_") + ".txt";
+    var name = (railwayaziz_CONFIG.brand + "-" + (D.username || "configs")).replace(/[^A-Za-z0-9_.-]+/g, "_") + ".txt";
     try {
       var blob = new Blob([list.join("\n") + "\n"], { type: "text/plain;charset=utf-8" });
       var url = URL.createObjectURL(blob), a = document.createElement("a");
@@ -1051,9 +1051,9 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
       var img = new Image(); img.alt = "QR"; img.decoding = "async";
       var retried = false;
       img.onerror = function () {
-        if (!retried) { retried = true; setTimeout(function () { img.src = "/jinx-api/qr?r=1&d=" + encodeURIComponent(text); }, 600); return; }   /* self-heal: one retry */
+        if (!retried) { retried = true; setTimeout(function () { img.src = "/railwayaziz-api/qr?r=1&d=" + encodeURIComponent(text); }, 600); return; }   /* self-heal: one retry */
         w.innerHTML = ""; var p = document.createElement("p"); p.textContent = tr("کد QR فقط روی سرور ساخته می‌شود", "QR is generated on the server"); w.appendChild(p); };
-      img.src = "/jinx-api/qr?d=" + encodeURIComponent(text);
+      img.src = "/railwayaziz-api/qr?d=" + encodeURIComponent(text);
       w.appendChild(img);
     });
   }
@@ -1083,7 +1083,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
       case "qr-cfg": e.preventDefault(); if (M.links[i] != null) qr(M.remarks[i], M.links[i]); break;
       case "download": e.preventDefault(); download(); flash(b); break;
       case "share": e.preventDefault();
-        if (navigator.share) navigator.share({ title: JINX_CONFIG.brand, url: M.sub }).catch(function (err) { if (err && err.name !== "AbortError") copy(M.sub, b); });
+        if (navigator.share) navigator.share({ title: railwayaziz_CONFIG.brand, url: M.sub }).catch(function (err) { if (err && err.name !== "AbortError") copy(M.sub, b); });
         else copy(M.sub, b, tr("لینک اشتراک کپی شد", "Subscription link copied"));
         break;
       case "deep": e.preventDefault(); deeplink(b.getAttribute("href")); break;
@@ -1097,13 +1097,13 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
       case "lang": e.preventDefault(); st.lang = st.lang === "fa" ? "en" : "fa"; S.set("jx-lang", st.lang); renderAll(false); setPing(); diagnose(false); break;
       case "op": e.preventDefault();
         var ov = jxOp(b.getAttribute("data-v")).k; if (ov === st.op) break; st.op = ov; S.set("jx-op", ov);
-        var cl = $("jx-cfgs"); if (cl) cl.innerHTML = JinxCfgList(M, st.op);
+        var cl = $("jx-cfgs"); if (cl) cl.innerHTML = railwayazizCfgList(M, st.op);
         var obs = document.querySelectorAll('[data-a="op"]'); for (var z = 0; z < obs.length; z++) { var zon = obs[z].getAttribute("data-v") === ov; obs[z].classList.toggle("on", zon); obs[z].setAttribute("aria-checked", zon ? "true" : "false"); }
         setPing(); if (ov !== "all") toast(tr("کانفیگ‌های مناسب " + jxOp(ov).fa + " اومدن بالا", "Best configs for " + jxOp(ov).en + " moved to the top"));
         break;
       case "tab": e.preventDefault();
         var v = b.getAttribute("data-v"); if (!v || v === st.tab) break; st.tab = v;
-        var box = $("jx-apps"); if (box) box.innerHTML = JinxApps(M, st.tab, fa());
+        var box = $("jx-apps"); if (box) box.innerHTML = railwayazizApps(M, st.tab, fa());
         var tabs = document.querySelectorAll('[data-a="tab"]');
         var sg = b.parentNode; if (sg && sg.style && sg.style.setProperty) sg.style.setProperty("--k", String(Math.max(0, M.plats.indexOf(v))));
         for (var k = 0; k < tabs.length; k++) { var on = tabs[k].getAttribute("data-v") === v; tabs[k].classList.toggle("on", on); tabs[k].setAttribute("aria-selected", on ? "true" : "false"); }
@@ -1133,7 +1133,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
     var app = $("app"); if (!app) return;
     app.innerHTML = "";
     var box = document.createElement("div"); box.className = "safe";
-    var h1 = document.createElement("h1"); h1.textContent = JINX_CONFIG.brand; box.appendChild(h1);
+    var h1 = document.createElement("h1"); h1.textContent = railwayaziz_CONFIG.brand; box.appendChild(h1);
     var p = document.createElement("p"); p.textContent = tr("حالت ایمن: نمایش ساده فعال شد تا کانفیگ‌ها همیشه در دسترس باشند.", "Safe mode: a simple view is shown so your configs stay available."); box.appendChild(p);
     var list = (D && D.links && D.links.length ? D.links : []).filter(function (x) { return typeof x === "string"; });
     var sub = (M && M.sub) || location.href.split("#")[0];
@@ -1144,7 +1144,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
       bt.addEventListener("click", function () { copy(txt, bt); });
       row.appendChild(bt); box.appendChild(row);
     });
-    var ch = document.createElement("a"); ch.className = "b full pri"; ch.href = JINX_CONFIG.channel; ch.target = "_blank"; ch.rel = "noopener noreferrer"; ch.textContent = tr("عضویت در کانال", "Join our channel");
+    var ch = document.createElement("a"); ch.className = "b full pri"; ch.href = railwayaziz_CONFIG.channel; ch.target = "_blank"; ch.rel = "noopener noreferrer"; ch.textContent = tr("عضویت در کانال", "Join our channel");
     ch.style.marginTop = "10px"; box.appendChild(ch);
     app.appendChild(box);
   }
@@ -1153,7 +1153,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
     catch (e1) {
       CARE.errors++;
       try { S.set("jx-theme", "dark"); S.set("jx-lang", "fa"); st.theme = "dark"; st.lang = "fa"; renderAll(false); CARE.healed++; return true; }   /* heal: reset prefs, render again */
-      catch (e2) { CARE.errors++; try { console.warn("[jinx] render failed: " + (e2 && e2.message)); } catch (x) {} safeMode(); return false; }
+      catch (e2) { CARE.errors++; try { console.warn("[railwayaziz] render failed: " + (e2 && e2.message)); } catch (x) {} safeMode(); return false; }
     }
   }
   window.addEventListener("error", function () { CARE.errors++; if (!appOk()) { if (!boot(false)) safeMode(); else CARE.healed++; } });
@@ -1211,7 +1211,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
         if (!DEMO && lastHealth && lastHealth.date) { var sd = Date.parse(lastHealth.date); if (isFinite(sd)) skew = Math.abs(Date.now() - sd) / 1000; }
         add(skew > 90 ? "bad" : "ok", tr("ساعت دستگاه", "Device clock"), skew > 90 ? tr("ساعت گوشی دقیق نیست؛ روی خودکار بگذار", "Clock is off; set it to automatic") : tr("دقیق", "Accurate"));
         if (DEMO) { add("ok", tr("سرویس QR", "QR service"), tr("پیش‌نمایش", "Preview")); finish(out); return; }
-        probe("/jinx-api/qr?d=jinx", 4000).then(function (r) {
+        probe("/railwayaziz-api/qr?d=railwayaziz", 4000).then(function (r) {
           add(r.ok ? "ok" : "warn", tr("سرویس QR", "QR service"), r.ok ? tr("سالم", "Healthy") : tr("در دسترس نیست؛ از کپی استفاده کن", "Unavailable; use copy"));
           finish(out);
         });
@@ -1283,7 +1283,7 @@ function isDesk() { try { return window.matchMedia("(min-width:900px)").matches;
   setTimeout(function () { if (!appOk()) { if (!boot(false)) safeMode(); } }, 2500);   /* watchdog */
   setTimeout(function () { diagnose(false); }, 600);
   setInterval(function () { if (!document.hidden && !CARE.busy) diagnose(false); }, 120000);   /* re-check every 2 minutes */
-  window.JINX = { model: function () { return M; }, state: st, care: CARE, diagnose: diagnose };
+  window.railwayaziz = { model: function () { return M; }, state: st, care: CARE, diagnose: diagnose };
 })();
 </script>
 </body>
