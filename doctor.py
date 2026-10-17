@@ -1,15 +1,4 @@
-# 🩺 JinX Doctor: support bot that watches every part of the panel and repairs it automatically
-#   nginx down          -> restarts nginx
-#   Xray inbound down   -> ports checked every 15s + a REAL WebSocket handshake to each config path every 60s;
-#                          if any config stops answering, Xray core is restarted through the panel API
-#   panel frozen (3x)   -> kills the frozen panel, the container restarts cleanly (restartPolicy ALWAYS)
-#   sub page broken     -> subscription template checked every 15s; missing / edited / Jinja error -> restored from golden copy
-#   daily backup        -> consistent copy of the panel database (users, admins) + agency data, last 7 kept
-#   tunnel down         -> handled by the auto-restart loop in start.sh, reported here
-#   RAM almost full     -> gentle Xray restart BEFORE the server runs out of memory (otherwise Railway kills everything)
-#   Xray restart refused by the panel API -> the stuck xray process is stopped, the panel starts a fresh core by itself
-#   /jx-status          -> live status of every part (nginx, panel, each config, RAM, last fix), no secrets in it
-# Optional Telegram alerts: set DOCTOR_TG_TOKEN + DOCTOR_TG_CHAT
+# 🩺 Doctor: support bot that watches every part of the panel and repairs it automatically
 import os, signal, socket, subprocess, time, json, urllib.request, urllib.parse
 
 API = "http://127.0.0.1:8000"
