@@ -1,8 +1,4 @@
 #!/bin/bash
-# ⚡ Super JinX | Iran relay (optional, lowest ping)
-# Run on an IRANIAN VPS (Ubuntu/Debian):   sudo bash iran-relay.sh xxxx.up.railway.app
-# Users connect to this Iranian server -> it forwards the encrypted traffic (untouched) to Railway.
-# Then add  IRAN_RELAY_IP=<this server IP>  in Railway variables and redeploy.
 set -e
 DOMAIN="${1:-}"
 PORTS="${RELAY_PORTS:-443}"            # e.g. RELAY_PORTS="443 8443"
