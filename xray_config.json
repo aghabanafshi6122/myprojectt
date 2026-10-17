@@ -15,7 +15,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/cdn/jinx/v",
+          "path": "/cdn/railwayaziz/v",
           "heartbeatPeriod": 30
         },
         "security": "none",
@@ -45,7 +45,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/cdn/jinx/m",
+          "path": "/cdn/railwayaziz/m",
           "heartbeatPeriod": 30
         },
         "security": "none",
@@ -75,7 +75,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/cdn/jinx/t",
+          "path": "/cdn/railwayaziz/t",
           "heartbeatPeriod": 30
         },
         "security": "none",
